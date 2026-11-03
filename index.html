@@ -13,6 +13,7 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <script>try{if(localStorage.getItem('ryan-portfolio-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
 <link rel="stylesheet" href="/assets/css/styles.css">
+<link rel="stylesheet" href="/assets/css/linear-perf.css">
 <script src="/assets/js/main.js" defer></script>
 
 </head>
@@ -72,7 +73,12 @@
 </div></section>
 <div class="container"><div class="divider"></div></div>
 <section class="section" id="work"><div class="container">
- <div class="section-heading"><div><span class="eyebrow">01 / Featured work</span><h2>Learning, through code.</h2><p>Hands-on implementations, experiments, and explanations — starting with automatic differentiation.</p></div><a href="/projects/" class="inline-link">All projects <span class="arrow">↗</span></a></div>
+ <div class="section-heading"><div><span class="eyebrow">01 / Featured work</span><h2>From gradients to GPU performance.</h2><p>Hands-on implementations and measured experiments — from automatic differentiation to GPU performance.</p></div><a href="/projects/" class="inline-link">All projects <span class="arrow">↗</span></a></div>
+ <article class="card featured-card card-hover lp-featured-card">
+<div class="featured-content"><div class="feature-top"><span class="feature-type">GPU performance · v0.4</span><span class="pill solid">Measured results</span></div>
+<h3>Linear Perf Lab</h3><p>Measuring and predicting dense linear-layer latency on an NVIDIA A100. Six FP16/BF16 sessions, five prediction models, and an evidence trail from raw timings to held-out evaluation.</p>
+<ul class="tag-list"><li>Python</li><li>PyTorch</li><li>CUDA timing</li><li>Performance modeling</li></ul>
+<a href="/projects/linear-perf-lab/" class="inline-link">Explore the results <span class="arrow">↗</span></a></div><div class="lp-card-visual"><div class="lp-visual-label"><span>RECORDED MODEL ERRORS</span><span>FP16 · s01</span></div><div class="lp-mini-chart"><div class="lp-mini-row"><span>FLOP-only</span><div class="lp-mini-track"><i style="width:92.4240%" class=""></i></div><b>60.1%</b></div><div class="lp-mini-row"><span>Roofline 2p</span><div class="lp-mini-track"><i style="width:83.5029%" class=""></i></div><b>54.3%</b></div><div class="lp-mini-row"><span>Roofline 3p</span><div class="lp-mini-track"><i style="width:33.5846%" class=""></i></div><b>21.8%</b></div><div class="lp-mini-row"><span>Shape-log Ridge</span><div class="lp-mini-track"><i style="width:39.4750%" class="lp-selected-bar"></i></div><b>25.7%</b></div><div class="lp-mini-row"><span>Residual KRR</span><div class="lp-mini-track"><i style="width:26.1746%" class=""></i></div><b>17.0%</b></div></div><div class="lp-visual-caption">Test median absolute percentage error · lower is better.<br>Green marks the development-selected model.</div></div></article>
  <article class="card featured-card card-hover"><div class="featured-content">
   <div class="feature-top"><span class="feature-type">Andrej Karpathy · Zero to Hero</span><span class="pill solid">Notebook available</span></div>
   <h3>Micrograd — Backpropagation from scratch</h3>
@@ -89,13 +95,6 @@
  <path d="M245 54C290 28 347 45 375 72" stroke="#7de0c6" stroke-width="1.5" stroke-dasharray="5 7" fill="none" opacity=".7"/>
  <text x="290" y="39" fill="#7de0c6" font-size="12" font-family="ui-monospace,monospace">∂output / ∂x</text>
  </svg></div></article>
-</div></section>
-<section class="section compact" style="padding-top:0"><div class="container">
- <div class="section-heading"><div><span class="eyebrow">02 / On the horizon</span><h2>Future projects.</h2><p>Ideas I'm preparing to explore. These are not completed projects yet.</p></div></div>
- <div class="grid-2">
- <article class="card future-card card-hover"><div class="feature-top"><div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="7" rx="2"/><path d="M7 6.5h.01M7 17.5h.01M12 6.5h6M12 17.5h6"/></svg></div><span class="pill neutral">Planned</span></div><h3>InferScale</h3><p>Exploring LLM inference serving, latency, throughput, and efficient deployment.</p></article>
- <article class="card future-card card-hover"><div class="feature-top"><div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg></div><span class="pill neutral">Planned</span></div><h3>TraceGuard</h3><p>Exploring LLM tracing, observability, and systematic evaluation of model behavior.</p></article>
- </div>
 </div></section>
 <section class="focus-strip"><div class="container"><div class="focus-box">
  <div><span class="eyebrow">What I'm exploring</span><h3>From model internals to real systems.</h3><p>Interested in language model architectures, pretraining, representation learning, and the engineering needed to make AI systems dependable.</p></div>

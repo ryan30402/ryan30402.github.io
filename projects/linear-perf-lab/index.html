@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linear Perf Lab | Ryan Chung</title>
+<meta name="description" content="GPU latency measurement and prediction on NVIDIA A100: six FP16/BF16 sessions, five models, and an interactive explorer of recorded results.">
+<meta name="theme-color" content="#090d14"><meta property="og:type" content="article"><meta property="og:title" content="Linear Perf Lab | Ryan Chung">
+<meta property="og:description" content="Controlled CUDA timing, five prediction models, and inspectable six-session evidence.">
+<link rel="canonical" href="https://ryan30402.github.io/projects/linear-perf-lab/"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>try{if(localStorage.getItem('ryan-portfolio-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="stylesheet" href="/assets/css/styles.css"><link rel="stylesheet" href="/assets/css/linear-perf.css">
+<script src="/assets/js/main.js" defer></script><script src="/assets/js/linear-perf.js" defer></script>
+</head><body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a href="/" class="brand" aria-label="Ryan Chung — home">
+      <span class="brand-mark" aria-hidden="true">RC</span>
+      <span class="brand-name">Ryan Chung<small>CS · AI / ML</small></span>
+    </a>
+    <nav class="primary-nav" aria-label="Main navigation" id="primary-navigation" data-primary-nav>
+      <a href="/">Home</a>
+<a href="/projects/" aria-current="page">Projects</a>
+<a href="/learning/">Learning</a>
+<a href="/about/">About</a>
+    </nav>
+    <div class="header-actions">
+      <a href="https://github.com/ryan30402" target="_blank" rel="noopener noreferrer" class="icon-button" title="GitHub profile" aria-label="Open GitHub profile in a new tab">
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.2 1.4-4.2-2.5-6-3m12 6v-3.9a3.4 3.4 0 0 0-.95-2.65c3.17-.35 6.5-1.56 6.5-7.05a5.5 5.5 0 0 0-1.5-3.83 5.1 5.1 0 0 0-.09-3.78S17.8.42 15 2.5a13.2 13.2 0 0 0-7 0C5.2.42 4.04.8 4.04.8a5.1 5.1 0 0 0-.1 3.78A5.5 5.5 0 0 0 2.5 8.4c0 5.48 3.33 6.7 6.5 7.05A3.4 3.4 0 0 0 8.05 18V22"/></svg>
+      </a>
+      <button class="icon-button" data-theme-toggle aria-label="Switch to light theme" title="Switch theme" type="button">
+        <svg data-icon="sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg data-icon="moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" hidden><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4a8.5 8.5 0 1 0 11.5 11.5Z"/></svg>
+      </button>
+      <button class="icon-button menu-button" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle navigation" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<main id="main" class="lp-page">
+<section class="lp-hero"><div class="container">
+  <a href="/projects/" class="inline-link lp-back">← Back to projects</a>
+  <div class="lp-hero-grid">
+    <div><span class="eyebrow">GPU performance engineering · v0.4</span>
+    <h1>Linear Perf Lab<span class="text-accent">.</span></h1>
+    <p class="lp-deck">Measure the work.<br>Understand the prediction.</p>
+    <p class="lead">A Python / PyTorch experiment system for measuring and predicting dense linear-layer latency. Built around controlled CUDA timing, held-out evaluation, and inspectable evidence.</p>
+    <div class="hero-actions"><a href="#results" class="btn btn-primary">Explore measured results <span aria-hidden="true">↓</span></a><a href="#evidence" class="btn btn-secondary">View the evidence <span aria-hidden="true">↗</span></a></div>
+    <ul class="tag-list lp-hero-tags"><li>Python</li><li>PyTorch</li><li>CUDA Graphs</li><li>Roofline modeling</li></ul></div>
+    <div class="lp-terminal-card" aria-label="Experiment specification">
+      <div class="lp-window-top"><span class="lp-window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>MEASUREMENT CONTRACT</span><span class="pill solid">CUDA measured</span></div>
+      <div class="lp-contract">
+        <span class="lp-code-comment">// One dense linear operation</span>
+        <div class="lp-equation"><span>Y</span> = <strong>X</strong> <span class="lp-multiply">@</span> <strong>Wᵀ</strong></div>
+        <div class="lp-matrices" aria-hidden="true"><div class="lp-matrix"><span>M × K</span><div></div></div><span>×</span><div class="lp-matrix lp-matrix-blue"><span>K × N</span><div></div></div><span>→</span><div class="lp-matrix lp-matrix-out"><span>M × N</span><div></div></div></div>
+        <dl class="lp-spec"><div><dt>Operation</dt><dd>torch.mm(X, W.T, out=Y)</dd></div><div><dt>Hardware</dt><dd>NVIDIA A100-SXM4-40GB</dd></div><div><dt>Timing</dt><dd>CUDA events · warm reuse</dd></div><div><dt>Unit</dt><dd>Replay time / GEMM · µs</dd></div></dl>
+      </div>
+      <div class="lp-window-bottom"><span class="lp-live-dot" aria-hidden="true"></span>Archived experiment results — not a live GPU demo</div>
+    </div>
+  </div>
+  <div class="lp-stats"><div><strong>6</strong><span>measured sessions</span><small>FP16 + BF16 · 3 rounds each</small></div><div><strong>96</strong><span>shapes per dtype</span><small>Same shapes repeated each round</small></div><div><strong>5</strong><span>prediction models</span><small>Selection uses development data</small></div><div><strong>3</strong><span>recorded GPU identities</span><small>One GPU model, not three architectures</small></div></div>
+</div></section>
+
+<div class="container"><nav class="lp-section-nav" aria-label="On this project page"><a href="#overview">Overview</a><a href="#results">Results explorer</a><a href="#method">Method</a><a href="#evidence">Evidence &amp; limits</a></nav></div>
+
+<section class="section compact" id="overview"><div class="container">
+  <div class="section-heading"><div><span class="eyebrow">01 / The engineering question</span><h2>Can shape predict latency?</h2></div></div>
+  <div class="lp-overview-grid"><p class="lp-overview-copy">Given matrix dimensions <code>M, N, K</code>, how accurately can a model predict the time required for a dense linear operation on a fixed GPU? This project compares simple compute-based estimates with shape-aware models, then checks where the predictions break down.</p>
+    <div class="lp-overview-note"><span class="overline">The central finding</span><h3>Stable measurements do not guarantee the best model choice.</h3><p>All six sessions passed their recorded timing gates. Yet the development-selected model did not consistently have the lowest held-out error. The original selections remain visible alongside all five candidates.</p></div></div>
+</div></section>
+
+<section class="section compact lp-results-section" id="results"><div class="container">
+  <div class="section-heading"><div><span class="eyebrow">02 / Explore the evidence</span><h2>Real runs. All five models.</h2><p>Change the precision, round, and evaluation split. Every value comes from the supplied v0.4 result tables.</p></div><span class="pill solid">Recorded data</span></div>
+  <div class="interactive-panel lp-model-panel">
+    <div class="panel-top"><div class="panel-title"><h3>Prediction error</h3></div><span class="panel-tag">LOWER IS BETTER</span></div>
+    <div class="lp-controls" id="model-controls">
+      <label>Precision<select id="perf-dtype" disabled><option value="fp16">FP16</option><option value="bf16">BF16</option></select></label>
+      <label>Round<select id="perf-round" disabled><option value="s01">Round 01</option><option value="s02">Round 02</option><option value="s03">Round 03</option></select></label>
+      <label>Evaluation split<select id="perf-split" disabled><option value="test">Test · 24 shapes</option><option value="challenge">Challenge · 12 shapes</option><option value="development">Development · 12 shapes</option></select></label>
+      <label>Error metric<select id="perf-metric" disabled><option value="median_ape_pct">Median APE</option><option value="p90_ape_pct">P90 APE</option></select></label>
+    </div>
+    <div class="lp-model-layout">
+      <div class="lp-error-chart" aria-label="Prediction error by model"><p class="lp-axis-note" id="perf-chart-caption">Loading recorded model errors…</p><div id="perf-model-bars"></div><div class="lp-legend"><span><i class="lp-swatch lp-swatch-selected"></i>Development-selected</span><span><i class="lp-swatch"></i>Other registered candidates</span></div></div>
+      <aside class="lp-selection-note"><span class="overline">Frozen selection</span><h3 id="perf-selected-model">—</h3><div class="lp-big-number" id="perf-selected-error">—</div><p id="perf-selected-context">Original development-only model selection.</p><p class="lp-small" id="perf-comparison-note"></p><p class="lp-small lp-fixed-note">Held-out scores are displayed for comparison, not used to replace the selected model.</p></aside>
+    </div>
+    <div class="lp-panel-foot"><p id="perf-live-status" role="status" aria-live="polite"></p><p>APE = |predicted − observed| / observed × 100. P90 shows the 90th percentile of per-shape errors. The axis rescales with each view; compare the printed values.</p><a class="inline-link" href="/assets/linear-perf/evidence/model_metrics.csv" download>Download all model metrics (CSV) ↗</a></div>
+  </div>
+
+  <div class="interactive-panel lp-shape-panel">
+    <div class="panel-top"><div class="panel-title"><h3>Shape matters: FP16 vs. BF16</h3></div><span class="panel-tag">MEASURED REPLAY TIME / GEMM</span></div>
+    <div class="lp-shape-controls"><label for="perf-shape">Choose a measured matrix shape<select id="perf-shape" disabled><option>Loading shapes…</option></select></label><div class="lp-example-buttons"><button type="button" class="filter-chip" data-example="t22" disabled>Example: smaller M</button><button type="button" class="filter-chip" data-example="t23" disabled>Example: larger M</button></div></div>
+    <div class="lp-shape-layout"><div class="lp-latency-chart"><div class="lp-legend"><span><i class="lp-swatch lp-swatch-selected"></i>FP16</span><span><i class="lp-swatch"></i>BF16</span></div><div id="perf-latency-bars"></div><p class="lp-axis-note">Microseconds per GEMM · lower is better</p></div>
+    <aside class="lp-shape-note"><span class="overline">Selected shape</span><h3 id="perf-shape-id">—</h3><dl class="lp-shape-dims"><div><dt>M</dt><dd id="perf-m">—</dd></div><div><dt>N</dt><dd id="perf-n">—</dd></div><div><dt>K</dt><dd id="perf-k">—</dd></div></dl><p class="lp-small" id="perf-shape-status" role="status" aria-live="polite"></p><p class="lp-small">For the two example shapes, the faster precision changes as M changes. This is an observation, not proof of a hardware mechanism.</p></aside></div>
+    <div class="lp-panel-foot"><p>Each FP16/BF16 pair shares the same recorded physical GPU within its round. FP16 was measured first; run order and runtime state may confound precision attribution.</p><a class="inline-link" href="/assets/linear-perf/evidence/paired_dtype_latencies.csv" download>Download paired latencies (CSV) ↗</a></div>
+  </div>
+  <div id="perf-data-error" class="note-box" role="alert" hidden>The interactive data could not be loaded. The recorded selection table and downloadable evidence below remain available. Preview this site with a local HTTP server, not a file:// URL.</div>
+  <noscript><p class="note-box">Enable JavaScript to use the explorers. The complete selected-model table and downloadable data remain available below.</p></noscript>
+
+  <details class="lp-details" open><summary>Original selected-model results · all six sessions</summary><div class="lp-table-scroll" role="region" tabindex="0" aria-label="Selected model results"><table class="lp-table"><caption>Median absolute percentage error by evaluation split. Lower is better.</caption><thead><tr><th scope="col">Session</th><th scope="col">Development-selected model</th><th scope="col">Development</th><th scope="col">Test</th><th scope="col">Challenge</th></tr></thead><tbody><tr><th scope="row">fp16_s01</th><td>Shape-log Ridge</td><td>13.72%</td><td>25.66%</td><td>31.96%</td></tr><tr><th scope="row">fp16_s02</th><td>Shape-log Ridge</td><td>14.12%</td><td>26.53%</td><td>31.75%</td></tr><tr><th scope="row">fp16_s03</th><td>Roofline residual KRR</td><td>13.96%</td><td>17.18%</td><td>21.17%</td></tr><tr><th scope="row">bf16_s01</th><td>3-parameter Roofline</td><td>13.63%</td><td>48.28%</td><td>51.83%</td></tr><tr><th scope="row">bf16_s02</th><td>3-parameter Roofline</td><td>13.47%</td><td>48.50%</td><td>51.63%</td></tr><tr><th scope="row">bf16_s03</th><td>3-parameter Roofline</td><td>12.77%</td><td>48.35%</td><td>51.64%</td></tr></tbody></table></div><p class="lp-small">The same 24 test shapes and 12 challenge shapes recur across rounds. Repeated rounds measure stability; they are not new independent shape sets.</p></details>
+</div></section>
+
+<section class="section compact" id="method"><div class="container">
+  <div class="section-heading"><div><span class="eyebrow">03 / How the study works</span><h2>From timing to a testable claim.</h2></div></div>
+  <div class="lp-process-grid">
+    <article class="card lp-process"><span class="lp-step">01 / MEASURE</span><h3>Fix the timing contract.</h3><p>Preallocated tensors, warm reuse, and CUDA events around a captured graph with 50 GEMMs. Take 9 replay samples per visit, across 3 blocks.</p></article>
+    <article class="card lp-process"><span class="lp-step">02 / FIT</span><h3>Compare five models.</h3><p>FLOP-only, 2p and 3p Roofline, shape-log Ridge, and Roofline residual KRR. Each starts from the same 24 calibration shapes.</p></article>
+    <article class="card lp-process"><span class="lp-step">03 / FREEZE</span><h3>Keep held-out data held out.</h3><p>Select using 12 development shapes. Freeze models and predictions before collecting test and challenge labels; do not reselect after seeing them.</p></article>
+    <article class="card lp-process"><span class="lp-step">04 / AUDIT</span><h3>Retain the evidence.</h3><p>Preserve raw timing blocks, control checks, provenance hashes, frozen predictions, and numerical witnesses for later review.</p></article>
+  </div>
+  <div class="lp-method-grid"><div class="code-showcase card"><div class="code-header"><span>Measurement contract · conceptual pseudocode</span></div><pre><code># Captured once; tensors are preallocated.
+# One replay contains 50 dense matrix multiplies.
+start.record()
+graph.replay()
+end.record()
+end.synchronize()
+
+per_gemm_us = start.elapsed_time(end) * 1000 / 50
+
+# Main label: median of 3 block medians.
+# Each block visit contains 9 replay samples.</code></pre></div><div class="lp-method-copy"><h3>A deliberately narrow target.</h3><p>The measured time includes GPU memory accesses and replay/inter-kernel gaps. It excludes CPU↔GPU transfers, allocation, graph capture, and serving queues.</p><p>The operation has no bias or activation. These measurements are not full Transformer or end-to-end LLM latency.</p><p class="lp-small">The protocol contains 96 modeling/pool shapes plus 8 separate diagnostic shapes. Diagnostics are not used for model fitting or selection.</p></div></div>
+</div></section>
+
+<section class="section compact" id="evidence"><div class="container">
+  <div class="section-heading"><div><span class="eyebrow">04 / Results with boundaries</span><h2>What the evidence supports.</h2><p>The archive preserves both useful results and reasons to be cautious.</p></div></div>
+  <div class="lp-findings">
+    <article class="card lp-finding"><span class="overline">Timing quality</span><h3>Six recorded audit passes.</h3><p>The supplied review records 5,468 internal checks per session. BF16 s03 retains a visible control qualification: x03 max/min = 1.1724 under a 1.2 gate. Nothing was removed to hide that variation.</p><p class="lp-small">These are archived internal audit outcomes, not vendor certification or an independent hardware attestation.</p></article>
+    <article class="card lp-finding"><span class="overline">Prediction quality</span><h3>Selection is still a limitation.</h3><p>Residual KRR test median APE spans 16.56–17.18% for FP16 and 16.44–16.75% for BF16. But it was selected in only one of the six sessions.</p><p class="lp-small">This candidate comparison does not establish that the automatic selector reliably chooses the best model or that a future redesign will improve accuracy.</p></article>
+    <article class="card lp-finding"><span class="overline">Offline batching diagnostic</span><h3>25.57–26.72× elapsed-time ratio.</h3><p>Across the six runs, 64 small GEMMs took that much longer than one equal-work larger GEMM under the offline experiment contract.</p><p class="lp-small">This is not an end-to-end LLM speedup. Batching queues, CPU overhead, and serving latency are outside this comparison.</p></article>
+  </div>
+  <details class="lp-details"><summary>Scope and limitations</summary><div class="lp-limitations"><p><strong>One hardware/software configuration.</strong> All sessions use NVIDIA A100-SXM4-40GB, recorded PyTorch 2.11.0+cu128, and CUDA runtime 12.8. Three recorded GPU identities do not establish cross-architecture generalization.</p><p><strong>Repeated shapes, not independent new tests.</strong> The same 96 shapes recur in every session. Challenge families are held out within v0.4, not necessarily unseen throughout the project's history.</p><p><strong>No mechanism claim.</strong> The package does not provide hardware counters sufficient to prove cache, bandwidth, or Tensor Core causes for a latency difference.</p><p><strong>Reported measurements, not a browser benchmark.</strong> Changing the controls only filters archived data. No GPU work, new model fitting, or result selection runs in the browser.</p></div></details>
+  <div class="lp-evidence-box"><div><span class="eyebrow">Inspect the source tables</span><h3>Trace the numbers back to the evidence.</h3><p>An English-language extract of the supplied CSV tables and JSON summaries, with file hashes and provenance. No new GPU measurements; the original values are preserved.</p><p class="lp-small">Source report: November 1, 2026 · v0.4.0 · This extract does not contain the full source release or raw traces.</p></div><div class="lp-evidence-actions"><a href="/assets/linear-perf/linear-perf-evidence.zip" download class="btn btn-primary">Download evidence <span aria-hidden="true">↓</span></a><a href="/assets/linear-perf/evidence/FINAL_SUMMARY.json" class="btn btn-secondary">View result summary <span aria-hidden="true">↗</span></a><a href="/assets/linear-perf/evidence/manifest.json" class="inline-link">Provenance &amp; file hashes ↗</a></div></div>
+  <a href="/projects/micrograd/" class="lp-next-project"><span><small>ALSO IN MY PORTFOLIO</small><strong>Micrograd — Backpropagation from scratch</strong></span><span aria-hidden="true">↗</span></a>
+</div></section>
+</main>
+
+</body></html>

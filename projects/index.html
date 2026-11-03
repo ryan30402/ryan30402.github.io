@@ -13,6 +13,7 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <script>try{if(localStorage.getItem('ryan-portfolio-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
 <link rel="stylesheet" href="/assets/css/styles.css">
+<link rel="stylesheet" href="/assets/css/linear-perf.css">
 <script src="/assets/js/main.js" defer></script>
 
 </head>
@@ -47,18 +48,21 @@
 <main id="main">
 <section class="page-intro"><div class="container">
  <span class="eyebrow">Selected projects</span><h1>Experiments with <span class="text-accent">substance.</span></h1>
- <p class="lead">The learning projects are real implementations. Future projects are clearly labeled plans — I'll add results and source code when there's something meaningful to show.</p>
+ <p class="lead">Measured GPU experiments and neural network implementations. Explore the methods, interact with the results, and inspect the evidence.</p>
 </div></section>
 <section class="section compact" style="padding-top:25px"><div class="container">
- <div class="section-heading"><div><span class="eyebrow">Explore by category</span><h2>Project library</h2></div><span class="text-faint" style="font-size:12px"><span data-filter-count>3</span> entries</span></div>
- <div class="filter-bar" aria-label="Filter projects"><button class="filter-chip" type="button" data-filter="all" aria-pressed="true">All</button><button class="filter-chip" type="button" data-filter="learning" aria-pressed="false">Learning series</button><button class="filter-chip" type="button" data-filter="planned" aria-pressed="false">Future projects</button></div>
+ <div class="section-heading"><div><span class="eyebrow">Explore by category</span><h2>Project library</h2></div><span class="text-faint" style="font-size:12px"><span data-filter-count>2</span> entries</span></div>
+ <div class="filter-bar" aria-label="Filter projects"><button class="filter-chip" type="button" data-filter="all" aria-pressed="true">All</button><button class="filter-chip" type="button" data-filter="learning" aria-pressed="false">Learning series</button><button class="filter-chip" type="button" data-filter="systems" aria-pressed="false">GPU / ML systems</button></div>
  <div class="project-card-list">
+<article class="card featured-card card-hover lp-featured-card" data-category="systems">
+<div class="featured-content"><div class="feature-top"><span class="feature-type">GPU performance · v0.4</span><span class="pill solid">Measured results</span></div>
+<h3>Linear Perf Lab</h3><p>Measuring and predicting dense linear-layer latency on an NVIDIA A100. Six FP16/BF16 sessions, five prediction models, and an evidence trail from raw timings to held-out evaluation.</p>
+<ul class="tag-list"><li>Python</li><li>PyTorch</li><li>CUDA timing</li><li>Performance modeling</li></ul>
+<a href="/projects/linear-perf-lab/" class="inline-link">Explore the results <span class="arrow">↗</span></a></div><div class="lp-card-visual"><div class="lp-visual-label"><span>RECORDED MODEL ERRORS</span><span>FP16 · s01</span></div><div class="lp-mini-chart"><div class="lp-mini-row"><span>FLOP-only</span><div class="lp-mini-track"><i style="width:92.4240%" class=""></i></div><b>60.1%</b></div><div class="lp-mini-row"><span>Roofline 2p</span><div class="lp-mini-track"><i style="width:83.5029%" class=""></i></div><b>54.3%</b></div><div class="lp-mini-row"><span>Roofline 3p</span><div class="lp-mini-track"><i style="width:33.5846%" class=""></i></div><b>21.8%</b></div><div class="lp-mini-row"><span>Shape-log Ridge</span><div class="lp-mini-track"><i style="width:39.4750%" class="lp-selected-bar"></i></div><b>25.7%</b></div><div class="lp-mini-row"><span>Residual KRR</span><div class="lp-mini-track"><i style="width:26.1746%" class=""></i></div><b>17.0%</b></div></div><div class="lp-visual-caption">Test median absolute percentage error · lower is better.<br>Green marks the development-selected model.</div></div></article>
    <article class="card project-feature" data-category="learning">
      <div class="project-entry"><div class="feature-top"><span class="feature-type">Featured learning series</span><span class="pill solid">In progress</span></div><h2>Neural Networks:<br>Zero to Hero</h2><p>Implementations and technical notes inspired by Andrej Karpathy's course, starting with a scalar autograd engine and backpropagation.</p><ul class="tag-list"><li>Micrograd</li><li>Autograd</li><li>PyTorch</li><li>Neural networks</li></ul><a href="/learning/" class="inline-link">Explore the learning roadmap <span class="arrow">↗</span></a></div>
      <div class="mini-dashboard"><span class="mini-dashboard-label">micrograd.py — from the notebook</span><code class="mini-code"><span class="purple">class</span> <span class="blue">Value</span>:<br>&nbsp;&nbsp;<span class="purple">def</span> <span class="green">backward</span>(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;...<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">for</span> node <span class="purple">in</span> reversed(topo):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node._backward()</code><a href="/projects/micrograd/" class="inline-link">Open Micrograd demo ↗</a></div>
    </article>
-   <article class="card future-card" data-category="planned"><div class="feature-top"><span class="feature-type">LLM infrastructure</span><span class="pill neutral">Coming soon</span></div><h3>InferScale</h3><p>Planned exploration of LLM inference serving, benchmarking, batching, and deployment efficiency.</p><ul class="tag-list" style="margin-top:auto;padding-top:22px"><li>Inference</li><li>Systems</li><li>Benchmarking</li></ul></article>
-   <article class="card future-card" data-category="planned"><div class="feature-top"><span class="feature-type">AI observability</span><span class="pill neutral">Coming soon</span></div><h3>TraceGuard</h3><p>Planned exploration of tracing, reliability testing, and evaluation workflows for LLM applications.</p><ul class="tag-list" style="margin-top:auto;padding-top:22px"><li>Tracing</li><li>Evaluations</li><li>Reliability</li></ul></article>
  </div>
 </div></section>
 </main>

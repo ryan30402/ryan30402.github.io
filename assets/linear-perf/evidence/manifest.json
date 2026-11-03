@@ -1,0 +1,57 @@
+{
+  "source_package": {
+    "supplied_archive": "linear-perf-lab-v0.4.0_REAL_RESULTS.zip",
+    "supplied_archive_sha256": "90f4197f9c6c46f9e5a80fb7b527c260a298b931fb52499cc8ba5802a063fb45",
+    "report_date": "2026-11-01",
+    "measurement_kind": "cuda_measured",
+    "source_release_sha256": "fad0f964c192808cf2600be11433e39ce4fa1b2cd8e0bd362bb109942614f59d",
+    "gpu_model": "NVIDIA A100-SXM4-40GB",
+    "description": "Static presentation of supplied archived results. No new GPU measurements or model selection."
+  },
+  "verified_original_archives": [
+    {
+      "filename": "linear-perf-v04_fp16_s01_RESULTS.zip",
+      "sha256": "f47fa0d24aa95acf5f664bb8ea5e9ff995b0761252a70ed6ee141bb5ae137288",
+      "matches_supplied_summary": true
+    },
+    {
+      "filename": "linear-perf-v04_fp16_s02_RESULTS.zip",
+      "sha256": "0f7f8084b2ab5e16aa0fda9a7e64ade2b900fd60d40fb43d8221c079c2ac7c72",
+      "matches_supplied_summary": true
+    },
+    {
+      "filename": "linear-perf-v04_fp16_s03_RESULTS.zip",
+      "sha256": "4ed90838f5c7f1ef63051c4d3605caed476c1356afaedf31e65dced3d74820b2",
+      "matches_supplied_summary": true
+    },
+    {
+      "filename": "linear-perf-v04_bf16_s01_RESULTS.zip",
+      "sha256": "a3e597dafac1792cd23ce1b107ecd65fb63d1baedfa511af4bd2d3519c8fc3b8",
+      "matches_supplied_summary": true
+    },
+    {
+      "filename": "linear-perf-v04_bf16_s02_RESULTS.zip",
+      "sha256": "ef75010021b1043bace932b584c3c65b3a020401b56bbab7d583c1a54a825304",
+      "matches_supplied_summary": true
+    },
+    {
+      "filename": "linear-perf-v04_bf16_s03_RESULTS.zip",
+      "sha256": "43c492fb4a0cea84c46bfdb8902921d56c408666fa5bf6199979585ecc6fe0fa",
+      "matches_supplied_summary": true
+    }
+  ],
+  "files": {
+    "EVIDENCE.md": "381cff624b4d84781a942fb8b90de45c70d9d1168854bbe25fff1949442cbe37",
+    "FINAL_SUMMARY.json": "586f96d0a52f6139bc102248f5292d55f2357f8c9060a1ea61230835c3ecb66b",
+    "case_latencies.csv": "8b2305e31d53e57155c3b2f2a6d427f54a7c216baba2db424f03fba8697362ab",
+    "cross_round_latency_spread.csv": "944251b8e5278f84ab288e3ef665f0bc2e803fed7740bd4acc3bf7253e399c55",
+    "frozen_krr_candidate_transfer.csv": "c8257f18411b22ea0212653bd709fa9dddfa261a98be3907743d9939ddad625d",
+    "frozen_selected_transfer.csv": "0fb1d757dd749372e55132a0d3a94a467ef369240495a08c71a2000d8f8a2968",
+    "model_metrics.csv": "93cd805446b36d5b7338a87d26f90d9249cb8f4d7706147641539bc8ce5cbfd4",
+    "offline_batching.csv": "cf37d0625a642eddc5ab46d544ee31d965e55ae9a31702c8444339cc471d5138",
+    "paired_dtype_latencies.csv": "63519bb7deacae1c772d52132eb3e98f145c3450ddf1b96cc69961c5d33f4ee7",
+    "quality_and_audits.csv": "b12ed30df991186c0544876fc04cf5cd4618abcab4511f266ab139b096c409ce",
+    "selected_pipeline.csv": "f59e7b5fabafd4bd6d4c1f28bf94666e3a13f215da2c7c2d8abaf63abcb62fb5",
+    "six_session_summary.json": "bf4f2e20f1e18c9977565f3ef9c19a7838313c58fa29c7b73318bad9acae335c"
+  }
+}
