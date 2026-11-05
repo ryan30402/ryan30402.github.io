@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Projects | Ryan Chung</title>
-<meta name="description" content="Learning implementations and planned AI/ML infrastructure projects by Ryan Chung.">
+<meta name="description" content="Measured GPU experiments and neural network implementations by Ryan Chung, with source code, methods, and reproducible results.">
 <meta name="theme-color" content="#090d14">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Projects | Ryan Chung">
-<meta property="og:description" content="Learning implementations and planned AI/ML infrastructure projects by Ryan Chung.">
+<meta property="og:description" content="Measured GPU experiments and neural network implementations by Ryan Chung, with source code, methods, and reproducible results.">
 <link rel="canonical" href="https://ryan30402.github.io/projects/">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <script>try{if(localStorage.getItem('ryan-portfolio-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
@@ -55,9 +55,9 @@
  <div class="filter-bar" aria-label="Filter projects"><button class="filter-chip" type="button" data-filter="all" aria-pressed="true">All</button><button class="filter-chip" type="button" data-filter="learning" aria-pressed="false">Learning series</button><button class="filter-chip" type="button" data-filter="systems" aria-pressed="false">GPU / ML systems</button></div>
  <div class="project-card-list">
 <article class="card featured-card card-hover lp-featured-card" data-category="systems">
-<div class="featured-content"><div class="feature-top"><span class="feature-type">GPU performance · v0.4</span><span class="pill solid">Measured results</span></div>
-<h3>Linear Perf Lab</h3><p>Measuring and predicting dense linear-layer latency on an NVIDIA A100. Six FP16/BF16 sessions, five prediction models, and an evidence trail from raw timings to held-out evaluation.</p>
-<ul class="tag-list"><li>Python</li><li>PyTorch</li><li>CUDA timing</li><li>Performance modeling</li></ul>
+<div class="featured-content"><div class="feature-top"><span class="feature-type">GPU performance · v1.0.0</span><span class="pill solid">Measured results</span></div>
+<h3>Transformer Linear Layer Performance Predictor</h3><p>CUDA Graph benchmarking and five latency predictors for Transformer linear layers. Six A100 FP16/BF16 sessions, 96 shapes, and frozen held-out evaluation.</p>
+<ul class="tag-list"><li>Python</li><li>PyTorch</li><li>CUDA Graphs</li><li>Performance modeling</li></ul>
 <a href="/projects/linear-perf-lab/" class="inline-link">Explore the results <span class="arrow">↗</span></a></div><div class="lp-card-visual"><div class="lp-visual-label"><span>RECORDED MODEL ERRORS</span><span>FP16 · s01</span></div><div class="lp-mini-chart"><div class="lp-mini-row"><span>FLOP-only</span><div class="lp-mini-track"><i style="width:92.4240%" class=""></i></div><b>60.1%</b></div><div class="lp-mini-row"><span>Roofline 2p</span><div class="lp-mini-track"><i style="width:83.5029%" class=""></i></div><b>54.3%</b></div><div class="lp-mini-row"><span>Roofline 3p</span><div class="lp-mini-track"><i style="width:33.5846%" class=""></i></div><b>21.8%</b></div><div class="lp-mini-row"><span>Shape-log Ridge</span><div class="lp-mini-track"><i style="width:39.4750%" class="lp-selected-bar"></i></div><b>25.7%</b></div><div class="lp-mini-row"><span>Residual KRR</span><div class="lp-mini-track"><i style="width:26.1746%" class=""></i></div><b>17.0%</b></div></div><div class="lp-visual-caption">Test median absolute percentage error · lower is better.<br>Green marks the development-selected model.</div></div></article>
    <article class="card project-feature" data-category="learning">
      <div class="project-entry"><div class="feature-top"><span class="feature-type">Featured learning series</span><span class="pill solid">In progress</span></div><h2>Neural Networks:<br>Zero to Hero</h2><p>Implementations and technical notes inspired by Andrej Karpathy's course, starting with a scalar autograd engine and backpropagation.</p><ul class="tag-list"><li>Micrograd</li><li>Autograd</li><li>PyTorch</li><li>Neural networks</li></ul><a href="/learning/" class="inline-link">Explore the learning roadmap <span class="arrow">↗</span></a></div>

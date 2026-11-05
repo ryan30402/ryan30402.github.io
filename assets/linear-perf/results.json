@@ -1,13 +1,18 @@
 {
   "schema_version": 1,
   "provenance": {
-    "supplied_archive": "linear-perf-lab-v0.4.0_REAL_RESULTS.zip",
-    "supplied_archive_sha256": "90f4197f9c6c46f9e5a80fb7b527c260a298b931fb52499cc8ba5802a063fb45",
+    "project": "Transformer Linear Layer Performance Predictor",
+    "publication_version": "1.0.0",
+    "repository_url": "https://github.com/ryan30402/transformer-linear-layer-performance-predictor",
+    "repository_commit": "603fcde80644fe08f2ba502feffc7e58f591a008",
+    "publication_manifest_url": "https://github.com/ryan30402/transformer-linear-layer-performance-predictor/blob/603fcde80644fe08f2ba502feffc7e58f591a008/results/MANIFEST.json",
+    "publication_manifest_sha256": "e7192aab5aa357c157b6cf9cb476a48971a899db06a227a5fe80724f1aa0415f",
+    "summary_directory_url": "https://github.com/ryan30402/transformer-linear-layer-performance-predictor/tree/603fcde80644fe08f2ba502feffc7e58f591a008/results/summary",
     "report_date": "2026-11-01",
     "measurement_kind": "cuda_measured",
-    "source_release_sha256": "fad0f964c192808cf2600be11433e39ce4fa1b2cd8e0bd362bb109942614f59d",
+    "recorded_acquisition_source_archive_sha256": "fad0f964c192808cf2600be11433e39ce4fa1b2cd8e0bd362bb109942614f59d",
     "gpu_model": "NVIDIA A100-SXM4-40GB",
-    "description": "Static presentation of supplied archived results. No new GPU measurements or model selection."
+    "description": "Static presentation of the first public release's recorded A100 results. Numerical values and frozen model choices are preserved; the website performs no GPU work, fitting, or model selection."
   },
   "models": [
     {
@@ -4623,7 +4628,7 @@
     "Only one GPU model/software stack and three recorded physical UUIDs; this is not cross-architecture validation.",
     "FP16 was collected before BF16 within each round; runtime order/state can confound precision attribution.",
     "Warm-reuse CUDA graph replay time per GEMM includes replay/inter-kernel gaps; excludes CPU-GPU transfers, allocation, capture and end-to-end LLM serving.",
-    "This script verifies archive integrity and shape pairing; full protocol, numerical and chronology audits are supplied separately by the trusted release study commands.",
+    "Recorded acquisition audit outcomes are summarized separately. The publication verifier checks exported-file integrity and reproducible numeric evidence; it does not reconstruct omitted original source bytes or original full-archive seals.",
     "No additional GPU measurements, retraining or model-selection changes were performed by this analysis."
   ]
 }

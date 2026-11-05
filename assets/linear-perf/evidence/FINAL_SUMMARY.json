@@ -1,5 +1,5 @@
 {
-  "status": "v04_six_session_evidence_review_complete",
+  "status": "six_session_evidence_review_complete",
   "report_date_local": "2026-11-01",
   "timezone": "America/New_York",
   "release_source_sha256": "fad0f964c192808cf2600be11433e39ce4fa1b2cd8e0bd362bb109942614f59d",
@@ -251,29 +251,29 @@
   "vendor_certification": false,
   "source_raw_archives": [
     {
-      "filename": "linear-perf-v04_fp16_s01_RESULTS.zip",
+      "session_id": "fp16_s01",
       "sha256": "f47fa0d24aa95acf5f664bb8ea5e9ff995b0761252a70ed6ee141bb5ae137288"
     },
     {
-      "filename": "linear-perf-v04_fp16_s02_RESULTS.zip",
+      "session_id": "fp16_s02",
       "sha256": "0f7f8084b2ab5e16aa0fda9a7e64ade2b900fd60d40fb43d8221c079c2ac7c72"
     },
     {
-      "filename": "linear-perf-v04_fp16_s03_RESULTS.zip",
+      "session_id": "fp16_s03",
       "sha256": "4ed90838f5c7f1ef63051c4d3605caed476c1356afaedf31e65dced3d74820b2"
     },
     {
-      "filename": "linear-perf-v04_bf16_s01_RESULTS.zip",
+      "session_id": "bf16_s01",
       "sha256": "a3e597dafac1792cd23ce1b107ecd65fb63d1baedfa511af4bd2d3519c8fc3b8"
     },
     {
-      "filename": "linear-perf-v04_bf16_s02_RESULTS.zip",
+      "session_id": "bf16_s02",
       "sha256": "ef75010021b1043bace932b584c3c65b3a020401b56bbab7d583c1a54a825304"
     },
     {
-      "filename": "linear-perf-v04_bf16_s03_RESULTS.zip",
+      "session_id": "bf16_s03",
       "sha256": "43c492fb4a0cea84c46bfdb8902921d56c408666fa5bf6199979585ecc6fe0fa"
     }
   ],
-  "note": "Each original run retains its original completed_pending_review status and conservative flags. This report is a separate derived review, not a mutation or certification."
+  "note": "Acquisition statuses and conservative flags are retained. This normalized snapshot and its CPU verification are separate from acquisition records and do not certify hardware."
 }

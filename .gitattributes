@@ -1,0 +1,3 @@
+# Preserve the exact bytes used by the recorded-results checksums.
+assets/linear-perf/** -text
+*.zip binary

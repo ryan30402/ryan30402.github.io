@@ -1,4 +1,4 @@
-/* Read-only browser explorer for the supplied Linear Perf Lab v0.4 results. */
+/* Read-only explorer for Transformer Linear Layer Performance Predictor, release 1.0.0. */
 (() => {
   'use strict';
   const byId = id => document.getElementById(id);
