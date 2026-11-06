@@ -1,0 +1,5 @@
+context_id,dtype,cache_policy,paired_shapes,median_absolute_change_pct,p90_absolute_change_pct,maximum_absolute_change_pct,pairs_above_10pct
+group_01_float16_rotating_buffers,float16,rotating_buffers,63,1.3444290872602656,4.933725105204142,12.392797110310463,3
+group_02_float16_warm_reuse,float16,warm_reuse,77,1.1825902155401584,5.473026256521692,27.868456201856606,4
+group_03_bfloat16_rotating_buffers,bfloat16,rotating_buffers,63,1.4130846226781169,4.802242442889207,12.12919864661204,1
+group_04_bfloat16_warm_reuse,bfloat16,warm_reuse,77,1.6110122910397984,5.138505405855309,28.185780440610277,2

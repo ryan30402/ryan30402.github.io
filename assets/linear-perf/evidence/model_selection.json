@@ -1,0 +1,82 @@
+{
+  "method": "Six-fold grouped cross-validation on training N,K families only; fold-local preprocessing and fitting, followed by refitting on all training rows.",
+  "primary_score": "Pooled out-of-fold weighted mean APE; weighted P90 and then fixed model order break ties.",
+  "heldout_labels_used_for_selection": false,
+  "test_labels_measured_before_fitting": true,
+  "repeat_labels_used_for_refit": false,
+  "cv_score_scope": "Training model-selection evidence; not an unbiased final-test performance estimate.",
+  "groups": [
+    {
+      "context_id": "group_01_float16_rotating_buffers",
+      "dtype": "float16",
+      "cache_policy": "rotating_buffers",
+      "training_shapes": 266,
+      "training_families": 19,
+      "folds": 6,
+      "configurations": 19,
+      "selected_model_id": "roofline_residual_krr",
+      "selected_configuration": {
+        "alpha": 0.01,
+        "length_scale": 4.0
+      },
+      "selection_score_key": "weighted_mean_ape_pct",
+      "secondary_score_key": "weighted_p90_ape_pct",
+      "selected_cv_weighted_mean_ape_pct": 9.517039904594094,
+      "feature_count": 22
+    },
+    {
+      "context_id": "group_02_float16_warm_reuse",
+      "dtype": "float16",
+      "cache_policy": "warm_reuse",
+      "training_shapes": 311,
+      "training_families": 23,
+      "folds": 6,
+      "configurations": 19,
+      "selected_model_id": "roofline_residual_krr",
+      "selected_configuration": {
+        "alpha": 0.1,
+        "length_scale": 2.0
+      },
+      "selection_score_key": "weighted_mean_ape_pct",
+      "secondary_score_key": "weighted_p90_ape_pct",
+      "selected_cv_weighted_mean_ape_pct": 13.060018933981794,
+      "feature_count": 22
+    },
+    {
+      "context_id": "group_03_bfloat16_rotating_buffers",
+      "dtype": "bfloat16",
+      "cache_policy": "rotating_buffers",
+      "training_shapes": 266,
+      "training_families": 19,
+      "folds": 6,
+      "configurations": 19,
+      "selected_model_id": "roofline_residual_krr",
+      "selected_configuration": {
+        "alpha": 0.01,
+        "length_scale": 4.0
+      },
+      "selection_score_key": "weighted_mean_ape_pct",
+      "secondary_score_key": "weighted_p90_ape_pct",
+      "selected_cv_weighted_mean_ape_pct": 8.079462596943738,
+      "feature_count": 22
+    },
+    {
+      "context_id": "group_04_bfloat16_warm_reuse",
+      "dtype": "bfloat16",
+      "cache_policy": "warm_reuse",
+      "training_shapes": 311,
+      "training_families": 23,
+      "folds": 6,
+      "configurations": 19,
+      "selected_model_id": "roofline_residual_krr",
+      "selected_configuration": {
+        "alpha": 0.1,
+        "length_scale": 2.0
+      },
+      "selection_score_key": "weighted_mean_ape_pct",
+      "secondary_score_key": "weighted_p90_ape_pct",
+      "selected_cv_weighted_mean_ape_pct": 12.781106064409004,
+      "feature_count": 22
+    }
+  ]
+}

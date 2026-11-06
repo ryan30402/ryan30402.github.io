@@ -1,90 +1,20 @@
 {
-  "schema_version": 1,
-  "project": "Transformer Linear Layer Performance Predictor",
-  "publication_version": "1.0.0",
-  "scope": "Portfolio summary extract of the published scientific snapshot. No new measurements, refitting, or selection; complete retained scientific evidence is in the linked repository.",
-  "source_publication": {
-    "project": "Transformer Linear Layer Performance Predictor",
-    "publication_version": "1.0.0",
-    "repository_url": "https://github.com/ryan30402/transformer-linear-layer-performance-predictor",
-    "repository_commit": "603fcde80644fe08f2ba502feffc7e58f591a008",
-    "publication_manifest_url": "https://github.com/ryan30402/transformer-linear-layer-performance-predictor/blob/603fcde80644fe08f2ba502feffc7e58f591a008/results/MANIFEST.json",
-    "publication_manifest_sha256": "e7192aab5aa357c157b6cf9cb476a48971a899db06a227a5fe80724f1aa0415f",
-    "summary_directory_url": "https://github.com/ryan30402/transformer-linear-layer-performance-predictor/tree/603fcde80644fe08f2ba502feffc7e58f591a008/results/summary",
-    "report_date": "2026-11-01",
-    "measurement_kind": "cuda_measured",
-    "recorded_acquisition_source_archive_sha256": "fad0f964c192808cf2600be11433e39ce4fa1b2cd8e0bd362bb109942614f59d",
-    "gpu_model": "NVIDIA A100-SXM4-40GB",
-    "description": "Static presentation of the first public release's recorded A100 results. Numerical values and frozen model choices are preserved; the website performs no GPU work, fitting, or model selection."
-  },
-  "summary_sources": {
-    "FINAL_SUMMARY.json": {
-      "repository_path": "results/summary/summary.json",
-      "sha256": "2c5a5cce468e147166d82befb8e7e43c01cbe0b08fc20aae87a31ce60194b90f"
-    },
-    "acquisition_all_budgets.csv": {
-      "repository_path": "results/summary/acquisition_all_budgets.csv",
-      "sha256": "958036ca34c5e8c6428fec768ff28028edc938eb4589033811a812178d7f2f71"
-    },
-    "case_latencies.csv": {
-      "repository_path": "results/summary/case_latencies.csv",
-      "sha256": "8b2305e31d53e57155c3b2f2a6d427f54a7c216baba2db424f03fba8697362ab"
-    },
-    "cross_round_latency_spread.csv": {
-      "repository_path": "results/summary/cross_round_latency_spread.csv",
-      "sha256": "944251b8e5278f84ab288e3ef665f0bc2e803fed7740bd4acc3bf7253e399c55"
-    },
-    "frozen_krr_candidate_transfer.csv": {
-      "repository_path": "results/summary/frozen_krr_candidate_transfer.csv",
-      "sha256": "c8257f18411b22ea0212653bd709fa9dddfa261a98be3907743d9939ddad625d"
-    },
-    "frozen_selected_transfer.csv": {
-      "repository_path": "results/summary/frozen_selected_transfer.csv",
-      "sha256": "0fb1d757dd749372e55132a0d3a94a467ef369240495a08c71a2000d8f8a2968"
-    },
-    "model_metrics.csv": {
-      "repository_path": "results/summary/model_metrics.csv",
-      "sha256": "93cd805446b36d5b7338a87d26f90d9249cb8f4d7706147641539bc8ce5cbfd4"
-    },
-    "offline_batching.csv": {
-      "repository_path": "results/summary/offline_batching.csv",
-      "sha256": "cf37d0625a642eddc5ab46d544ee31d965e55ae9a31702c8444339cc471d5138"
-    },
-    "paired_dtype_latencies.csv": {
-      "repository_path": "results/summary/paired_dtype_latencies.csv",
-      "sha256": "63519bb7deacae1c772d52132eb3e98f145c3450ddf1b96cc69961c5d33f4ee7"
-    },
-    "quality_and_audits.csv": {
-      "repository_path": "results/summary/quality_and_audits.csv",
-      "sha256": "b12ed30df991186c0544876fc04cf5cd4618abcab4511f266ab139b096c409ce"
-    },
-    "selected_pipeline.csv": {
-      "repository_path": "results/summary/selected_pipeline.csv",
-      "sha256": "f59e7b5fabafd4bd6d4c1f28bf94666e3a13f215da2c7c2d8abaf63abcb62fb5"
-    },
-    "six_session_summary.json": {
-      "repository_path": "results/summary/cross_session_summary.json",
-      "sha256": "63e8a2edf2a5e8ddba700d83e9a1336672a0d613bd0732d54aa2c85e359bf1a0"
-    }
-  },
-  "presentation": {
-    "url_path": "/assets/linear-perf/results.json",
-    "sha256": "d758faa96b176b5bd1103e5de69c2e4c737abd93707b8061df8cdeb8be54e1cd",
-    "scope": "Same scientific arrays as the source tables, with publication metadata and display labels."
-  },
+  "schema_version": 2,
+  "protocol_version": "1.1.0",
+  "path_base": "assets/linear-perf/",
+  "source_commit": "59a6cc5aa126abbe4b0b64eb9f1e1ecedae4c911",
+  "results_archive_sha256": "a601e14bb3d1d2b661f06021432b461104850452ddcc1c695c55006db29374b1",
   "files": {
-    "EVIDENCE.md": "0fa7348a80b228a1bc1cfe3f01c6980f29d369aba49981df1b188a6f1b9414d9",
-    "FINAL_SUMMARY.json": "2c5a5cce468e147166d82befb8e7e43c01cbe0b08fc20aae87a31ce60194b90f",
-    "acquisition_all_budgets.csv": "958036ca34c5e8c6428fec768ff28028edc938eb4589033811a812178d7f2f71",
-    "case_latencies.csv": "8b2305e31d53e57155c3b2f2a6d427f54a7c216baba2db424f03fba8697362ab",
-    "cross_round_latency_spread.csv": "944251b8e5278f84ab288e3ef665f0bc2e803fed7740bd4acc3bf7253e399c55",
-    "frozen_krr_candidate_transfer.csv": "c8257f18411b22ea0212653bd709fa9dddfa261a98be3907743d9939ddad625d",
-    "frozen_selected_transfer.csv": "0fb1d757dd749372e55132a0d3a94a467ef369240495a08c71a2000d8f8a2968",
-    "model_metrics.csv": "93cd805446b36d5b7338a87d26f90d9249cb8f4d7706147641539bc8ce5cbfd4",
-    "offline_batching.csv": "cf37d0625a642eddc5ab46d544ee31d965e55ae9a31702c8444339cc471d5138",
-    "paired_dtype_latencies.csv": "63519bb7deacae1c772d52132eb3e98f145c3450ddf1b96cc69961c5d33f4ee7",
-    "quality_and_audits.csv": "b12ed30df991186c0544876fc04cf5cd4618abcab4511f266ab139b096c409ce",
-    "selected_pipeline.csv": "f59e7b5fabafd4bd6d4c1f28bf94666e3a13f215da2c7c2d8abaf63abcb62fb5",
-    "six_session_summary.json": "63e8a2edf2a5e8ddba700d83e9a1336672a0d613bd0732d54aa2c85e359bf1a0"
+    "evidence/EVIDENCE.md": "6b2d383756b702bc874888fce41c74822666f1a8b4720c2db4d73b69a6da69d6",
+    "evidence/measurement_contract.json": "3f5ecf65049698b5300b394b7482ab240b03d5227a890cd2403a601ba07387c2",
+    "evidence/model_metrics.csv": "92973f1cb09e85f95f0085312151ee582d3e60b7f68f798f37651f268159dbf9",
+    "evidence/model_selection.json": "c168e92450cd8744ba611fc8c7f5aac1e198678f4262187710cbe7df09f5234b",
+    "evidence/provenance.json": "9e3e8ad60086862281265552476bf4a1807658f412157fdffc9179c9b67e318a",
+    "evidence/quality_summary.json": "db27e8b34b57c809d1453af87c53aa1fa2f33679f6833d46c2287ba8c7085fc7",
+    "evidence/repeat_comparison.csv": "6ee9403bc397a50049264983bd76b7c5dfae41b6514ab24834935ca4f4537542",
+    "evidence/repeat_summary.csv": "438bb66e8a838dafa05c5f6c34d89fba9e6753ded6a99d8dd2ae373d76497b9f",
+    "evidence/sampling_cases.csv": "b3c86f83f5e2ea0e0e15f4c84d64664c7ce65edcba254b50263d37b2bedfaa70",
+    "evidence/selected_model_metrics.csv": "a0cecc7e609e745bd2e6ff498eacb62e52a9887d0ed8868e320ba3634df33a78",
+    "results.json": "dc31d34b75d7ab8efb412bd3aaa79f21133550eb46b38bee18dee2075a46f860"
   }
 }

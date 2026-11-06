@@ -13,7 +13,7 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <script>try{if(localStorage.getItem('ryan-portfolio-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
 <link rel="stylesheet" href="/assets/css/styles.css">
-<link rel="stylesheet" href="/assets/css/linear-perf.css">
+<link rel="stylesheet" href="/assets/css/linear-perf.css?v=1.1.0">
 <script src="/assets/js/main.js" defer></script>
 
 </head>
@@ -75,10 +75,10 @@
 <section class="section" id="work"><div class="container">
  <div class="section-heading"><div><span class="eyebrow">01 / Featured work</span><h2>From gradients to GPU performance.</h2><p>Hands-on implementations and measured experiments — from automatic differentiation to GPU performance.</p></div><a href="/projects/" class="inline-link">All projects <span class="arrow">↗</span></a></div>
  <article class="card featured-card card-hover lp-featured-card">
-<div class="featured-content"><div class="feature-top"><span class="feature-type">GPU performance · v1.0.0</span><span class="pill solid">Measured results</span></div>
-<h3>Transformer Linear Layer Performance Predictor</h3><p>CUDA Graph benchmarking and five latency predictors for Transformer linear layers. Six A100 FP16/BF16 sessions, 96 shapes, and frozen held-out evaluation.</p>
+<div class="featured-content"><div class="feature-top"><span class="feature-type">GPU performance · v1.1.0</span><span class="pill solid">Measured results</span></div>
+<h3>Transformer Linear Layer Performance Predictor</h3><p>Predicting Transformer linear-layer latency from matrix shapes. A 609-shape A100 experiment in FP16 and BF16, with training-only cross-validation and two buffer policies.</p>
 <ul class="tag-list"><li>Python</li><li>PyTorch</li><li>CUDA Graphs</li><li>Performance modeling</li></ul>
-<a href="/projects/linear-perf-lab/" class="inline-link">Explore the results <span class="arrow">↗</span></a></div><div class="lp-card-visual"><div class="lp-visual-label"><span>RECORDED MODEL ERRORS</span><span>FP16 · s01</span></div><div class="lp-mini-chart"><div class="lp-mini-row"><span>FLOP-only</span><div class="lp-mini-track"><i style="width:92.4240%" class=""></i></div><b>60.1%</b></div><div class="lp-mini-row"><span>Roofline 2p</span><div class="lp-mini-track"><i style="width:83.5029%" class=""></i></div><b>54.3%</b></div><div class="lp-mini-row"><span>Roofline 3p</span><div class="lp-mini-track"><i style="width:33.5846%" class=""></i></div><b>21.8%</b></div><div class="lp-mini-row"><span>Shape-log Ridge</span><div class="lp-mini-track"><i style="width:39.4750%" class="lp-selected-bar"></i></div><b>25.7%</b></div><div class="lp-mini-row"><span>Residual KRR</span><div class="lp-mini-track"><i style="width:26.1746%" class=""></i></div><b>17.0%</b></div></div><div class="lp-visual-caption">Test median absolute percentage error · lower is better.<br>Green marks the development-selected model.</div></div></article>
+<a href="/projects/linear-perf-lab/" class="inline-link">Explore the results <span class="arrow">↗</span></a></div><div class="lp-card-visual"><div class="lp-visual-label"><span>HELD-OUT PREDICTION ERROR</span><span>A100 · v1.1.0</span></div><div class="lp-mini-chart"><div class="lp-mini-row" data-context="group_01_float16_rotating_buffers"><span>FP16 · rotation</span><div class="lp-mini-track"><i style="width:71.3312%" class="lp-selected-bar"></i></div><b>8.56%</b></div><div class="lp-mini-row" data-context="group_02_float16_warm_reuse"><span>FP16 · warm</span><div class="lp-mini-track"><i style="width:86.0361%" class="lp-selected-bar"></i></div><b>10.32%</b></div><div class="lp-mini-row" data-context="group_03_bfloat16_rotating_buffers"><span>BF16 · rotation</span><div class="lp-mini-track"><i style="width:64.2417%" class="lp-selected-bar"></i></div><b>7.71%</b></div><div class="lp-mini-row" data-context="group_04_bfloat16_warm_reuse"><span>BF16 · warm</span><div class="lp-mini-track"><i style="width:80.3093%" class="lp-selected-bar"></i></div><b>9.64%</b></div></div><div class="lp-visual-caption">Ordinary-test weighted mean APE · lower is better.<br>Separate fitted models and eligible cohorts. Timing-quality flags are retained in the report.</div></div></article>
  <article class="card featured-card card-hover"><div class="featured-content">
   <div class="feature-top"><span class="feature-type">Andrej Karpathy · Zero to Hero</span><span class="pill solid">Notebook available</span></div>
   <h3>Micrograd — Backpropagation from scratch</h3>
