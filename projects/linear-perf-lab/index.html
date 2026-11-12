@@ -1,13 +1,11 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Transformer Linear Layer Performance Predictor | Ryan Chung</title>
-<meta name="description" content="A 609-shape A100 study of Transformer linear-layer latency: four precision and buffer contexts, training-only model selection, and qualified held-out results.">
-<meta name="theme-color" content="#090d14"><meta property="og:type" content="article"><meta property="og:title" content="Transformer Linear Layer Performance Predictor | Ryan Chung">
-<meta property="og:description" content="Explore v1.1.0: CUDA Graph measurements, five predictor families, 609 primary shapes, and a same-session repeat with visible timing-quality qualifications.">
+<title>Project temporarily unavailable | Ryan Chung</title><meta name="description" content="Browse current projects by Ryan Chung."><meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#0a1018"><meta property="og:type" content="article"><meta property="og:title" content="Project temporarily unavailable | Ryan Chung"><meta property="og:description" content="Browse current projects by Ryan Chung.">
 <link rel="canonical" href="https://ryan30402.github.io/projects/linear-perf-lab/"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <script>try{if(localStorage.getItem('ryan-portfolio-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
-<link rel="stylesheet" href="/assets/css/styles.css"><link rel="stylesheet" href="/assets/css/linear-perf.css?v=1.1.0">
-<script src="/assets/js/main.js" defer></script><script src="/assets/js/linear-perf.js?v=1.1.0" defer></script>
+<link rel="stylesheet" href="/assets/css/styles.css"><link rel="stylesheet" href="/assets/css/prefix-cache.css">
+<script src="/assets/js/main.js" defer></script>
 </head><body><a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="container nav-wrap">
@@ -35,168 +33,6 @@
     </div>
   </div>
 </header>
-<main id="main" class="lp-page">
-<section class="lp-hero"><div class="container">
-  <a href="/projects/" class="inline-link lp-back">← Back to projects</a>
-  <div class="lp-hero-grid">
-    <div>
-      <span class="eyebrow">GPU performance engineering · v1.1.0</span>
-      <h1 class="lp-project-title">Transformer Linear Layer Performance Predictor<span class="text-accent">.</span></h1>
-      <p class="lp-deck">Measure the operation.<br>Understand the prediction.</p>
-      <p class="lead">A Python/PyTorch benchmark and latency predictor for dense Transformer linear operations. The current A100 experiment compares five model families across 609 shapes, two precisions, and two buffer policies.</p>
-      <div class="hero-actions"><a href="https://github.com/ryan30402/transformer-linear-layer-performance-predictor/tree/59a6cc5aa126abbe4b0b64eb9f1e1ecedae4c911" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View source on GitHub <span aria-hidden="true">↗</span></a><a href="#results" class="btn btn-secondary">Explore measured results <span aria-hidden="true">↓</span></a></div>
-      <ul class="tag-list lp-hero-tags"><li>Python</li><li>PyTorch</li><li>CUDA Graphs</li><li>Roofline + residual KRR</li></ul>
-    </div>
-    <div class="lp-terminal-card" aria-label="Experiment specification">
-      <div class="lp-window-top"><span class="lp-window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>MEASUREMENT CONTRACT</span><span class="pill solid">CUDA measured</span></div>
-      <div class="lp-contract">
-        <span class="lp-code-comment">// One dense linear operation</span>
-        <div class="lp-equation"><span>Y</span> = <strong>X</strong> <span class="lp-multiply">@</span> <strong>Wᵀ</strong></div>
-        <div class="lp-matrices" aria-hidden="true"><div class="lp-matrix"><span>M × K</span><div></div></div><span>×</span><div class="lp-matrix lp-matrix-blue"><span>K × N</span><div></div></div><span>→</span><div class="lp-matrix lp-matrix-out"><span>M × N</span><div></div></div></div>
-        <dl class="lp-spec">
-          <div><dt>Operation</dt><dd>torch.mm(X, W.T, out=Y)</dd></div>
-          <div><dt>Hardware</dt><dd>NVIDIA A100-SXM4-40GB</dd></div>
-          <div><dt>Timing</dt><dd>CUDA events · adaptive graph replay</dd></div>
-          <div><dt>Buffers</dt><dd>Warm reuse · four-buffer rotation</dd></div>
-          <div><dt>Unit</dt><dd>Replay time / GEMM · µs</dd></div>
-        </dl>
-      </div>
-      <div class="lp-window-bottom"><span class="lp-live-dot" aria-hidden="true"></span>Archived experiment · 6 November 2026</div>
-    </div>
-  </div>
-  <div class="lp-stats">
-    <div><strong>609</strong><span>distinct primary shapes</span><small>Retained after planning exclusions</small></div>
-    <div><strong>4</strong><span>precision / buffer contexts</span><small>FP16 + BF16 · two policies each</small></div>
-    <div><strong>5</strong><span>predictor families</span><small>19 configurations · 6-fold training CV</small></div>
-    <div><strong>77</strong><span>predetermined repeat shapes</span><small>Same recorded GPU and session</small></div>
-  </div>
-</div></section>
+<main id="main" class="pc-page"><section class="pc-container pc-section" style="min-height:50vh"><p class="pc-eyebrow">PROJECTS</p><h1>Project temporarily unavailable<span>.</span></h1><p class="pc-lead">This page is not currently featured. Browse the current project collection below.</p><div class="pc-actions"><a class="pc-btn pc-primary" href="/projects/">All projects</a><a class="pc-btn" href="/projects/vllm-prefix-cache-bench/">vLLM Prefix-Cache Benchmark ↗</a></div></section></main>
 
-<div class="container"><nav class="lp-section-nav" aria-label="On this project page"><a href="#overview">Overview</a><a href="#results">Results explorer</a><a href="#workload">Workload</a><a href="#method">Method</a><a href="#evidence">Evidence &amp; limits</a></nav></div>
-
-<section class="section compact" id="overview"><div class="container">
-  <div class="section-heading"><div><span class="eyebrow">01 / The engineering question</span><h2>Can shape predict latency?</h2></div></div>
-  <div class="lp-overview-grid">
-    <p class="lp-overview-copy">Given matrix dimensions <code>M, N, K</code>, how accurately can a model predict a dense linear operation on a fixed GPU? This project compares compute and memory proxies with shape-aware models, selects on training families, and evaluates where the predictions hold up.</p>
-    <div class="lp-overview-note"><span class="overline">The central finding</span><h3>7.71–10.32% error on ordinary tests.</h3><p>That range is <strong>weighted mean absolute percentage error</strong> across the four selected predictors. Warm unseen-family challenge error is about 29%; irregular-shape stress error reaches 49–57%. Timing-quality flags remain part of the result.</p><a class="inline-link" href="#evidence">Read the qualifications <span aria-hidden="true">↓</span></a></div>
-  </div>
-</div></section>
-
-<section class="section compact lp-results-section" id="results"><div class="container">
-  <div class="section-heading"><div><span class="eyebrow">02 / Explore the evidence</span><h2>One study. Five model families.</h2><p>Compare recorded errors by precision, buffer policy, and evaluation scope. Model selection stays fixed to the training-only cross-validation result.</p></div><span class="pill solid">Recorded data</span></div>
-  <div class="interactive-panel lp-model-panel">
-    <div class="panel-top"><div class="panel-title"><h3>Prediction error</h3></div><span class="panel-tag">LOWER IS BETTER</span></div>
-    <div class="lp-controls" id="model-controls">
-      <label>Precision<select id="perf-dtype" disabled><option value="float16">FP16</option><option value="bfloat16">BF16</option></select></label>
-      <label>Buffer policy<select id="perf-policy" disabled><option value="warm_reuse">Warm reuse</option><option value="rotating_buffers">Four-buffer rotation</option></select></label>
-      <label>Evaluation scope<select id="perf-split" disabled><option value="test">Ordinary test · 134 shapes</option><option value="challenge">Family challenge · 118 shapes</option><option value="stress">Irregular stress · 46 shapes</option></select></label>
-      <label>Error metric<select id="perf-metric" disabled><option value="weighted_mean_ape_pct">Weighted mean APE</option><option value="mean_ape_pct">Mean APE · unweighted</option><option value="median_ape_pct">Median APE · unweighted</option><option value="p90_ape_pct">P90 APE · unweighted</option><option value="worst_ape_pct">Worst APE · unweighted</option></select></label>
-    </div>
-    <div class="lp-model-layout">
-      <div class="lp-error-chart" aria-label="Prediction error by model" aria-busy="true" id="perf-chart"><p class="lp-axis-note" id="perf-chart-caption">Loading recorded model errors…</p><div id="perf-model-bars"></div><div class="lp-legend"><span><i class="lp-swatch lp-swatch-selected" aria-hidden="true"></i>Selected by training CV</span><span><i class="lp-swatch" aria-hidden="true"></i>Other candidate families</span></div></div>
-      <aside class="lp-selection-note"><span class="overline">Training-only selection</span><h3 id="perf-selected-model">Roofline residual KRR</h3><div class="lp-big-number" id="perf-selected-error">—</div><p id="perf-selected-context">All four contexts select Roofline with a kernel-ridge residual correction.</p><p class="lp-small" id="perf-comparison-note"></p><p class="lp-small lp-fixed-note" id="perf-selection-design">Six folds grouped by N/K family. Held-out results never replace the selected model.</p></aside>
-    </div>
-    <div class="lp-panel-foot">
-      <p id="perf-live-status" role="status" aria-live="polite"></p>
-      <p id="perf-cohort-note">Ordinary test uses unseen M values in N/K families represented in training.</p>
-      <p id="perf-metric-note">APE = |predicted − measured| / measured × 100. Weighted mean APE uses declared architectural-operation weights under a synthetic workload mixture. These weights do not represent measured production traffic.</p>
-      <p>Mean, median, P90, and worst APE are unweighted across cases. P90 is the 90th percentile. Each context has its own fit and eligible cohort; the chart axis rescales with each view.</p>
-      <a class="inline-link" href="/assets/linear-perf/evidence/model_metrics.csv" download>Download all candidate metrics (CSV) <span aria-hidden="true">↓</span></a>
-    </div>
-  </div>
-  <div id="perf-data-error" class="note-box" role="alert" hidden>The interactive comparison is unavailable. The selected-model table and downloadable results remain available below.</div>
-  <noscript><p class="note-box">The selected-model table, workload counts, and downloadable evidence are available without JavaScript.</p></noscript>
-  <details class="lp-details" open>
-    <summary>Selected-model results · all four contexts</summary>
-    <div class="lp-table-scroll" role="region" tabindex="0" aria-label="Selected model results"><table class="lp-table lp-selected-table">
-      <caption>Weighted mean APE. Every context selected Roofline residual KRR using training-only CV. All flagged observations remain included.</caption>
-      <thead><tr><th scope="col">Context</th><th scope="col">Ordinary test</th><th scope="col">Family challenge</th><th scope="col">Irregular stress</th></tr></thead>
-      <tbody>
-        <tr><th scope="row">FP16 · four-buffer rotation</th><td>8.56%<span class="lp-cell-count">113 shapes</span></td><td>9.53%<span class="lp-cell-count">100 shapes</span></td><td>49.47%<span class="lp-cell-count">40 shapes</span></td></tr>
-        <tr><th scope="row">FP16 · warm reuse</th><td>10.32%<span class="lp-cell-count">134 shapes</span></td><td>29.15%<span class="lp-cell-count">118 shapes</span></td><td>53.94%<span class="lp-cell-count">46 shapes</span></td></tr>
-        <tr><th scope="row">BF16 · four-buffer rotation</th><td>7.71%<span class="lp-cell-count">113 shapes</span></td><td>6.26%<span class="lp-cell-count">100 shapes</span></td><td>53.93%<span class="lp-cell-count">40 shapes</span></td></tr>
-        <tr><th scope="row">BF16 · warm reuse</th><td>9.64%<span class="lp-cell-count">134 shapes</span></td><td>28.97%<span class="lp-cell-count">118 shapes</span></td><td>57.31%<span class="lp-cell-count">46 shapes</span></td></tr>
-      </tbody>
-    </table></div>
-    <p class="lp-small">Rotation and warm reuse use different eligible cohorts and separately fitted models. Their error differences do not isolate a causal cache effect. <a class="inline-link" href="/assets/linear-perf/evidence/selected_model_metrics.csv" download>Selected metrics (CSV) <span aria-hidden="true">↓</span></a></p>
-  </details>
-</div></section>
-
-<section class="section compact" id="workload"><div class="container">
-  <div class="section-heading"><div><span class="eyebrow">03 / The workload</span><h2>Different shapes. Different questions.</h2><p>Architecture-derived dimensions cover token-row counts and layer widths. A separate artificial stress set changes N and K by +1.</p></div></div>
-  <div class="interactive-panel lp-sampling-panel">
-    <div class="panel-top"><div class="panel-title"><h3>Actual primary shape counts</h3></div><span class="panel-tag">AFTER PLANNING EXCLUSIONS</span></div>
-    <div class="lp-sampling-top">
-      <div><span class="overline">Measured cohort · per precision</span><p class="lp-sampling-total"><strong id="perf-sampling-total">609</strong> <span>distinct shapes</span></p><p class="lp-small" id="perf-sampling-caption" role="status" aria-live="polite">Warm reuse retains 609 shapes per precision; four-buffer rotation is eligible for 519.</p></div>
-      <label class="lp-sampling-policy">Show buffer policy<select id="perf-sampling-policy" disabled><option value="warm_reuse">Warm reuse · 609 shapes</option><option value="rotating_buffers">Four-buffer rotation · 519 shapes</option></select></label>
-    </div>
-    <div class="lp-sampling-bars" id="perf-sampling-bars">
-      <div class="lp-split-row" data-split="train"><div><strong>Train</strong><span>Fits models and selects configurations</span></div><div class="lp-track" aria-hidden="true"><i class="lp-bar" style="width:100%"></i></div><b>311</b></div>
-      <div class="lp-split-row" data-split="test"><div><strong>Ordinary test</strong><span>Unseen M in known N/K families</span></div><div class="lp-track" aria-hidden="true"><i class="lp-bar" style="width:43.0868%"></i></div><b>134</b></div>
-      <div class="lp-split-row" data-split="challenge"><div><strong>Family challenge</strong><span>Entirely unseen N/K families</span></div><div class="lp-track" aria-hidden="true"><i class="lp-bar" style="width:37.9421%"></i></div><b>118</b></div>
-      <div class="lp-split-row" data-split="stress"><div><strong>Irregular stress</strong><span>Artificial N+1 and K+1 dimensions</span></div><div class="lp-track" aria-hidden="true"><i class="lp-bar" style="width:14.7910%"></i></div><b>46</b></div>
-    </div>
-    <div class="lp-family-inspector" id="perf-family-inspector" hidden>
-      <div class="lp-family-heading"><div><span class="overline">Inspect a shape family</span><h3 id="perf-family-title">N and K fix the layer widths.</h3><p class="lp-small" id="perf-family-description"></p></div><label>Choose N × K<select id="perf-family" disabled><option>Loading shape families…</option></select></label></div>
-      <div class="lp-legend lp-split-legend"><span><i class="lp-swatch lp-train-swatch" aria-hidden="true"></i>Train</span><span><i class="lp-swatch" aria-hidden="true"></i>Test</span><span><i class="lp-swatch lp-challenge-swatch" aria-hidden="true"></i>Challenge</span><span><i class="lp-swatch lp-stress-swatch" aria-hidden="true"></i>Stress</span><span><i class="lp-repeat-key" aria-hidden="true">R</i>Predetermined repeat</span></div>
-      <div class="lp-case-grid" id="perf-family-cases" role="list" aria-label="Measured M values in the selected family"></div>
-      <p class="lp-small lp-family-status" id="perf-family-status" role="status" aria-live="polite"></p>
-    </div>
-    <div class="lp-panel-foot"><p>M is the number of token rows, N the output width, and K the input width. Split membership and the repeat subset were assigned from shapes without using measured latencies.</p><p>Rotation uses four buffer sets when the weight matrix is at most twice the recorded 40 MiB L2 capacity. Larger weights retain warm-reuse measurements. Two warm-only ordinary-test cases extend beyond their family's surviving training M range.</p><a class="inline-link" href="/assets/linear-perf/evidence/sampling_cases.csv" download>Download shape and split assignments (CSV) <span aria-hidden="true">↓</span></a></div>
-  </div>
-</div></section>
-
-<section class="section compact" id="method"><div class="container">
-  <div class="section-heading"><div><span class="eyebrow">04 / How the study works</span><h2>Collect. Select. Evaluate. Repeat.</h2><p>Held-out labels are collected before fitting. Their role is evaluation; only training rows enter model selection and refitting.</p></div></div>
-  <div class="lp-process-grid">
-    <article class="card lp-process"><span class="lp-step">01 / MEASURE</span><h3>Fix the timing contract.</h3><p>Preallocated tensors, CUDA events, and adaptive graph replay. Collect 3 visits of 9 replay samples per case, with FP16 and BF16 interleaved in a seeded schedule.</p></article>
-    <article class="card lp-process"><span class="lp-step">02 / SELECT</span><h3>Hold out whole families.</h3><p>Compare 19 configurations across five predictor families in 6 training-only folds grouped by N/K. Fit feature scaling inside each fold; select by weighted mean APE.</p></article>
-    <article class="card lp-process"><span class="lp-step">03 / EVALUATE</span><h3>Refit, then assess.</h3><p>Refit each family's chosen configuration on all eligible training rows: 311 for warm reuse and 266 for rotation. Evaluate ordinary test, challenge, and stress separately.</p></article>
-    <article class="card lp-process"><span class="lp-step">04 / REPEAT</span><h3>Keep the models fixed.</h3><p>Measure 77 predetermined shapes later in the same session, including 63 eligible for rotation. Compare paired timings and apply the unchanged primary models.</p></article>
-  </div>
-  <div class="lp-method-grid">
-    <div class="code-showcase card"><div class="code-header"><span>Timing contract · conceptual pseudocode</span></div><pre><code># Tensors and graph are prepared before timing.
-# The adaptive graph contains 1–256 GEMMs.
-start.record()
-graph.replay()
-end.record()
-end.synchronize()
-
-per_gemm_us = (
-    start.elapsed_time(end) * 1000 / captured_gemms
-)
-
-# 9 replay samples per visit; 3 timed visits.
-# Label = median of the three visit medians.</code></pre></div>
-    <div class="lp-method-copy"><h3>A precise operation-level target.</h3><p>The measured interval includes GPU reads, writes, and replay/inter-kernel gaps. Allocation, host-device transfers, warmup, graph capture, profiling, fitting, and serving queues are outside it.</p><p>The operation has no bias or activation. The optional decoder-layer experiment was not run; no full Transformer or end-to-end LLM speedup was measured.</p><p class="lp-small">Candidates: FLOP-only, two- and three-parameter Roofline, shape-log Ridge, and Roofline residual KRR. Kernel names and profiler durations are excluded from predictor inputs.</p><div class="lp-method-links"><a class="inline-link" href="https://github.com/ryan30402/transformer-linear-layer-performance-predictor/blob/59a6cc5aa126abbe4b0b64eb9f1e1ecedae4c911/docs/PROTOCOL.md" target="_blank" rel="noopener noreferrer">Read the protocol <span aria-hidden="true">↗</span></a><a class="inline-link" href="https://github.com/ryan30402/transformer-linear-layer-performance-predictor/blob/59a6cc5aa126abbe4b0b64eb9f1e1ecedae4c911/docs/MODELS.md" target="_blank" rel="noopener noreferrer">Model design <span aria-hidden="true">↗</span></a></div></div>
-  </div>
-</div></section>
-
-<section class="section compact" id="evidence"><div class="container">
-  <div class="section-heading"><div><span class="eyebrow">05 / Results with boundaries</span><h2>What the evidence supports.</h2><p>Stage completion, measurement quality, and prediction accuracy are separate findings.</p></div></div>
-  <div class="lp-findings">
-    <article class="card lp-finding lp-qualified-finding"><span class="overline">Timing quality</span><h3>Complete, with qualifications.</h3><p>Every requested stage completed. Six of 2,256 primary aggregate rows exceed the between-visit threshold; one of six repeat control groups also fails its threshold.</p><p class="lp-small"><strong>Overall timing-quality flag: false.</strong> Flagged data remain included. None of the six flagged primary rows is in the repeat subset, so the repeat does not resolve those flags.</p><a class="inline-link" href="https://github.com/ryan30402/transformer-linear-layer-performance-predictor/blob/59a6cc5aa126abbe4b0b64eb9f1e1ecedae4c911/docs/RESULTS.md#5-timing-quality-qualifications" target="_blank" rel="noopener noreferrer">Inspect the quality records <span aria-hidden="true">↗</span></a></article>
-    <article class="card lp-finding"><span class="overline">Prediction limits</span><h3>Coverage still matters.</h3><p>Warm unseen-family challenge error is about 29% weighted mean APE. Irregular stress reaches 49.47–57.31%; its N/K alignment states have no matching training examples.</p><p class="lp-small">Some comparator models perform better on these held-out slices. The training-selected KRR remains fixed. These are point estimates from one primary collection.</p><a class="inline-link" href="https://github.com/ryan30402/transformer-linear-layer-performance-predictor/blob/59a6cc5aa126abbe4b0b64eb9f1e1ecedae4c911/docs/RESULTS.md#7-observed-model-limitations" target="_blank" rel="noopener noreferrer">Inspect failure cases <span aria-hidden="true">↗</span></a></article>
-    <article class="card lp-finding"><span class="overline">Same-session repeat</span><h3>Typical agreement. Real exceptions.</h3><p>Across the four contexts, median absolute timing changes are 1.18–1.61%. The largest paired change is 28.19%, even though that shape passes each stage's internal checks.</p><p class="lp-small">The 77-shape subset uses the same recorded physical GPU and software session. It does not establish cross-day or cross-architecture transfer.</p><a class="inline-link" href="/assets/linear-perf/evidence/repeat_comparison.csv" download>Download repeat comparison <span aria-hidden="true">↓</span></a></article>
-  </div>
-  <details class="lp-details"><summary>Scope and limitations</summary><div class="lp-limitations">
-    <p><strong>One hardware/software configuration.</strong> NVIDIA A100-SXM4-40GB, PyTorch 2.11.0+cu130, CUDA runtime 13.0, and driver 580.82.07. The primary collection and repeat share the same physical GPU.</p>
-    <p><strong>Buffer rotation has a specific contract.</strong> Four buffer sets do not guarantee cold-cache execution or complete cache eviction. Hardware counters, measured cache-hit rates, and Tensor Core utilization were not collected. Recorded latency differences do not prove a hardware mechanism.</p>
-    <p><strong>Evaluation has now been inspected.</strong> These cases document the current model's strengths and failures. Future model changes need new final evaluation cases for fresh generalization claims. No calibrated per-shape prediction interval is provided.</p>
-    <p><strong>Archived measurements.</strong> This explorer filters published results. No GPU timing, fitting, or model selection runs in the browser.</p>
-  </div></details>
-  <div class="lp-evidence-box">
-    <div><span class="eyebrow">Inspect the implementation</span><h3>Follow each result to its evidence.</h3><p>The source repository retains raw timing samples, fitted models, selection records, per-case predictions, numerical checks, and separate profiling traces. This page provides a compact extract of the completed experiment.</p><p class="lp-small">Release v1.1.0 · 6 November 2026 · source <code>59a6cc5</code>. Source links are pinned to that revision. The local download contains result tables and provenance; the original archive contains the full recorded experiment.</p></div>
-    <div class="lp-evidence-actions">
-      <a href="https://github.com/ryan30402/transformer-linear-layer-performance-predictor/tree/59a6cc5aa126abbe4b0b64eb9f1e1ecedae4c911" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View source on GitHub <span aria-hidden="true">↗</span></a>
-      <a href="/assets/linear-perf/linear-perf-evidence.zip" download class="btn btn-secondary">Download result tables <span aria-hidden="true">↓</span></a>
-      <a href="https://github.com/ryan30402/transformer-linear-layer-performance-predictor/blob/59a6cc5aa126abbe4b0b64eb9f1e1ecedae4c911/docs/RESULTS.md" target="_blank" rel="noopener noreferrer" class="inline-link">Read the full results <span aria-hidden="true">↗</span></a>
-      <a href="https://github.com/ryan30402/transformer-linear-layer-performance-predictor/raw/59a6cc5aa126abbe4b0b64eb9f1e1ecedae4c911/experiments/a100_20261106/results.zip" class="inline-link">Download the original archive <span aria-hidden="true">↓</span></a>
-      <a href="https://github.com/ryan30402/transformer-linear-layer-performance-predictor/blob/59a6cc5aa126abbe4b0b64eb9f1e1ecedae4c911/docs/REPRODUCIBILITY.md" target="_blank" rel="noopener noreferrer" class="inline-link">Reproduce the analysis <span aria-hidden="true">↗</span></a>
-      <a href="/assets/linear-perf/evidence/manifest.json" class="inline-link">Provenance &amp; file hashes <span aria-hidden="true">↗</span></a>
-    </div>
-  </div>
-  <a href="/projects/micrograd/" class="lp-next-project"><span><small>ALSO IN MY PORTFOLIO</small><strong>Micrograd — Backpropagation from scratch</strong></span><span aria-hidden="true">↗</span></a>
-</div></section>
-</main>
 </body></html>

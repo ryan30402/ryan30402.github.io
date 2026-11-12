@@ -13,9 +13,9 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <script>try{if(localStorage.getItem('ryan-portfolio-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
 <link rel="stylesheet" href="/assets/css/styles.css">
-<link rel="stylesheet" href="/assets/css/linear-perf.css?v=1.1.0">
 <script src="/assets/js/main.js" defer></script>
 
+<link rel="stylesheet" href="/assets/css/prefix-cache.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -73,12 +73,15 @@
 </div></section>
 <div class="container"><div class="divider"></div></div>
 <section class="section" id="work"><div class="container">
- <div class="section-heading"><div><span class="eyebrow">01 / Featured work</span><h2>From gradients to GPU performance.</h2><p>Hands-on implementations and measured experiments — from automatic differentiation to GPU performance.</p></div><a href="/projects/" class="inline-link">All projects <span class="arrow">↗</span></a></div>
- <article class="card featured-card card-hover lp-featured-card">
-<div class="featured-content"><div class="feature-top"><span class="feature-type">GPU performance · v1.1.0</span><span class="pill solid">Measured results</span></div>
-<h3>Transformer Linear Layer Performance Predictor</h3><p>Predicting Transformer linear-layer latency from matrix shapes. A 609-shape A100 experiment in FP16 and BF16, with training-only cross-validation and two buffer policies.</p>
-<ul class="tag-list"><li>Python</li><li>PyTorch</li><li>CUDA Graphs</li><li>Performance modeling</li></ul>
-<a href="/projects/linear-perf-lab/" class="inline-link">Explore the results <span class="arrow">↗</span></a></div><div class="lp-card-visual"><div class="lp-visual-label"><span>HELD-OUT PREDICTION ERROR</span><span>A100 · v1.1.0</span></div><div class="lp-mini-chart"><div class="lp-mini-row" data-context="group_01_float16_rotating_buffers"><span>FP16 · rotation</span><div class="lp-mini-track"><i style="width:71.3312%" class="lp-selected-bar"></i></div><b>8.56%</b></div><div class="lp-mini-row" data-context="group_02_float16_warm_reuse"><span>FP16 · warm</span><div class="lp-mini-track"><i style="width:86.0361%" class="lp-selected-bar"></i></div><b>10.32%</b></div><div class="lp-mini-row" data-context="group_03_bfloat16_rotating_buffers"><span>BF16 · rotation</span><div class="lp-mini-track"><i style="width:64.2417%" class="lp-selected-bar"></i></div><b>7.71%</b></div><div class="lp-mini-row" data-context="group_04_bfloat16_warm_reuse"><span>BF16 · warm</span><div class="lp-mini-track"><i style="width:80.3093%" class="lp-selected-bar"></i></div><b>9.64%</b></div></div><div class="lp-visual-caption">Ordinary-test weighted mean APE · lower is better.<br>Separate fitted models and eligible cohorts. Timing-quality flags are retained in the report.</div></div></article>
+ <div class="section-heading"><div><span class="eyebrow">01 / Featured work</span><h2>From gradients to LLM serving.</h2><p>Hands-on implementations and measured experiments — from automatic differentiation to LLM serving.</p></div><a href="/projects/" class="inline-link">All projects <span class="arrow">↗</span></a></div>
+ <article class="card featured-card card-hover pc-featured" data-category="systems" data-project="vllm-prefix-cache-bench">
+<div class="pc-card-content"><div class="pc-card-top"><span>LLM inference · Serving performance</span><span class="pc-badge">Measured results</span></div>
+<h3>vLLM Prefix-Cache Benchmark</h3><p>A Python benchmark harness for shared-prefix reuse, concurrency, and KV-cache pressure. 42 reference runs and 21,000 measured requests on an NVIDIA A40.</p>
+<ul class="pc-tags"><li>Python</li><li>vLLM</li><li>Prometheus</li><li>pytest</li></ul>
+<a href="/projects/vllm-prefix-cache-bench/" class="pc-card-link">Explore the project <span aria-hidden="true">↗</span></a></div>
+<div class="pc-card-visual"><div class="pc-panel-label">RECORDED OUTPUT THROUGHPUT</div><div class="pc-card-gain">2.79<span>×</span></div>
+<div class="pc-bar-row"><span>Cache off</span><div class="pc-track"><i class="pc-bar pc-off" style="width:35.86%"></i></div><b>271.2</b></div><div class="pc-bar-row"><span>Cache on</span><div class="pc-track"><i class="pc-bar pc-on" style="width:100%"></i></div><b>756.3</b></div>
+<p class="pc-note">tokens/s · 2,048-token prefix · concurrency 32<br>Qwen2.5-7B-Instruct · A40 · 3 repeats<br>Synthetic workload; gains depend on the request mix.</p></div></article>
  <article class="card featured-card card-hover"><div class="featured-content">
   <div class="feature-top"><span class="feature-type">Andrej Karpathy · Zero to Hero</span><span class="pill solid">Notebook available</span></div>
   <h3>Micrograd — Backpropagation from scratch</h3>

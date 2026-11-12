@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>vLLM Prefix-Cache Benchmark | Ryan Chung</title><meta name="description" content="Controlled vLLM serving experiments on NVIDIA A40: prefix caching, concurrency, TTFT, throughput, and reproducible benchmark tooling.">
+<meta name="theme-color" content="#0a1018"><meta property="og:type" content="article"><meta property="og:title" content="vLLM Prefix-Cache Benchmark | Ryan Chung"><meta property="og:description" content="Controlled vLLM serving experiments on NVIDIA A40: prefix caching, concurrency, TTFT, throughput, and reproducible benchmark tooling.">
+<link rel="canonical" href="https://ryan30402.github.io/projects/vllm-prefix-cache-bench/"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>try{if(localStorage.getItem('ryan-portfolio-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="stylesheet" href="/assets/css/styles.css"><link rel="stylesheet" href="/assets/css/prefix-cache.css">
+<script src="/assets/js/main.js" defer></script><script src="/assets/js/prefix-cache.js" defer></script>
+</head><body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a href="/" class="brand" aria-label="Ryan Chung — home">
+      <span class="brand-mark" aria-hidden="true">RC</span>
+      <span class="brand-name">Ryan Chung<small>CS · AI / ML</small></span>
+    </a>
+    <nav class="primary-nav" aria-label="Main navigation" id="primary-navigation" data-primary-nav>
+      <a href="/">Home</a>
+<a href="/projects/" aria-current="page">Projects</a>
+<a href="/learning/">Learning</a>
+<a href="/about/">About</a>
+    </nav>
+    <div class="header-actions">
+      <a href="https://github.com/ryan30402" target="_blank" rel="noopener noreferrer" class="icon-button" title="GitHub profile" aria-label="Open GitHub profile in a new tab">
+        <svg width="18" height="18" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.2 1.4-4.2-2.5-6-3m12 6v-3.9a3.4 3.4 0 0 0-.95-2.65c3.17-.35 6.5-1.56 6.5-7.05a5.5 5.5 0 0 0-1.5-3.83 5.1 5.1 0 0 0-.09-3.78S17.8.42 15 2.5a13.2 13.2 0 0 0-7 0C5.2.42 4.04.8 4.04.8a5.1 5.1 0 0 0-.1 3.78A5.5 5.5 0 0 0 2.5 8.4c0 5.48 3.33 6.7 6.5 7.05A3.4 3.4 0 0 0 8.05 18V22"/></svg>
+      </a>
+      <button class="icon-button" data-theme-toggle aria-label="Switch to light theme" title="Switch theme" type="button">
+        <svg data-icon="sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg data-icon="moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" hidden><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4a8.5 8.5 0 1 0 11.5 11.5Z"/></svg>
+      </button>
+      <button class="icon-button menu-button" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle navigation" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="pc-page">
+  <section class="pc-hero pc-container">
+    <a class="pc-back" href="/projects/">← All projects</a>
+    <div class="pc-hero-grid">
+      <div>
+        <p class="pc-eyebrow">LLM INFERENCE / SERVING PERFORMANCE</p>
+        <h1>vLLM Prefix-Cache<br><span>Benchmark</span></h1>
+        <p class="pc-deck">Less repeated work.<br>Evidence, not assumptions.</p>
+        <p class="pc-lead">A Python benchmark harness for measuring how shared-prefix reuse and concurrency change language-model serving performance.</p>
+        <div class="pc-actions"><a class="pc-btn pc-primary" href="https://github.com/ryan30402/vllm-prefix-cache-bench">View code <span aria-hidden="true">↗</span></a><a class="pc-btn" href="#results">Explore the results <span aria-hidden="true">↓</span></a></div>
+        <ul class="pc-tags" aria-label="Technologies"><li>Python</li><li>vLLM</li><li>Prometheus</li><li>pytest</li></ul>
+      </div>
+      <aside class="pc-hero-card" aria-label="Recorded throughput comparison">
+        <div class="pc-panel-label"><span>MEASURED · NVIDIA A40</span><span class="pc-dot" aria-hidden="true"></span></div>
+        <div class="pc-headline"><strong>2.79<span>×</span></strong><p>output-token throughput<br><span>cache on / cache off</span></p></div>
+        <div class="pc-bar-row"><span>Cache off</span><div class="pc-track"><i class="pc-bar pc-off" style="width:35.86%"></i></div><b>271.2</b></div>
+        <div class="pc-bar-row"><span>Cache on</span><div class="pc-track"><i class="pc-bar pc-on" style="width:100%"></i></div><b>756.3</b></div>
+        <p class="pc-unit">Output tokens/s · higher is better</p>
+        <div class="pc-hero-foot">2,048 shared tokens · concurrency 32<br>Qwen2.5-7B-Instruct · BF16 · vLLM 0.33.0<br><span>Medians of 3 repeats · synthetic workload</span></div>
+      </aside>
+    </div>
+    <div class="pc-stats"><div><b>42</b><span>reference runs</span></div><div><b>21,000</b><span>measured requests</span></div><div><b>3</b><span>repeats per configuration</span></div><div><b>1</b><span>GPU model · NVIDIA A40</span></div></div>
+  </section>
+  <nav class="pc-container pc-jump" aria-label="On this page"><a href="#question">The question</a><a href="#results">Results explorer</a><a href="#method">What I built</a><a href="#scope">Scope &amp; evidence</a></nav>
+  <section id="question" class="pc-section pc-container">
+    <div class="pc-section-title"><p class="pc-eyebrow">01 / THE QUESTION</p><h2>When does reusing a prefix pay off?</h2><p>Repeated system prompts and documents can create reusable computation. This study isolates a controlled, shared-prefix workload rather than assuming every request benefits equally.</p></div>
+    <div class="pc-two-col"><div class="pc-panel pc-prefix-demo" role="img" aria-label="Three requests share the same prefix tokens and have different suffix tokens. The benchmark switches vLLM's existing cache off and on."><div class="pc-panel-label">CONTROLLED REQUESTS</div><div class="pc-prompt"><em>A</em><span class="pc-shared">Same prefix tokens</span><span class="pc-suffix">Suffix A</span></div><div class="pc-prompt"><em>B</em><span class="pc-shared">Same prefix tokens</span><span class="pc-suffix">Suffix B</span></div><div class="pc-prompt"><em>C</em><span class="pc-shared">Same prefix tokens</span><span class="pc-suffix">Suffix C</span></div><div class="pc-toggle-demo"><span>Cache off</span><b aria-hidden="true">⇄</b><span>Cache on</span></div><p class="pc-note">Token-controlled inputs. vLLM supplies the prefix-cache implementation; this project supplies the experiment and measurement tooling.</p></div>
+    <div class="pc-panel pc-findings"><div class="pc-panel-label">THREE OBSERVATIONS</div><h3>The workload determines the gain.</h3><p>At a 2,048-token prefix and concurrency 32, throughput increases from 271.2 to 756.3 output tokens/s.</p><h3>The no-prefix control stays near 1×.</h3><p>At concurrency 32 without a shared prefix, throughput is 832.2 versus 831.8 tokens/s. There is no meaningful throughput gain in that condition.</p><h3>Latency needs context.</h3><p>The initial closed-loop burst contributes to tail TTFT. End-to-end latency here excludes waiting in the client-side concurrency queue.</p></div></div>
+  </section>
+  <section id="results" class="pc-section pc-container">
+    <div class="pc-section-title"><p class="pc-eyebrow">02 / RECORDED RESULTS</p><h2>Compare the same workload, cache off and on.</h2><p>Six normal-memory reference conditions. Three repeats per cache setting. No live model or GPU runs in this page.</p></div>
+    <div class="pc-panel pc-results">
+      <div class="pc-controls"><label>Shared prefix / concurrency<select id="pc-scenario"><option value="0">0 prefix tokens · concurrency 1</option><option value="1">0 prefix tokens · concurrency 32</option><option value="2">2,048 prefix tokens · concurrency 1</option><option value="3" selected>2,048 prefix tokens · concurrency 32</option><option value="4">2,048 prefix tokens · concurrency 128</option><option value="5">4,096 prefix tokens · concurrency 128</option></select></label><label>Metric<select id="pc-metric"><option value="throughput">Output throughput · tokens/s</option><option value="ttft">p50 time to first token · ms</option><option value="tpot">Mean time per output token · ms</option><option value="e2e">p50 end-to-end latency · ms</option><option value="p99">p99 time to first token · ms</option></select></label></div>
+      <div class="pc-results-grid"><div><h3 id="pc-chart-title">Output throughput</h3><p class="pc-note" id="pc-direction">Higher is better · tokens/s</p><div class="pc-chart" role="img" id="pc-chart" aria-label="Cache off 271.2 output tokens per second; cache on 756.3 output tokens per second."><div class="pc-result-bar"><div><span>Cache off</span><strong id="pc-off-value">271.2</strong></div><div class="pc-track"><i id="pc-off-bar" class="pc-bar pc-off" style="width:35.86%"></i></div></div><div class="pc-result-bar"><div><span>Cache on</span><strong id="pc-on-value">756.3</strong></div><div class="pc-track"><i id="pc-on-bar" class="pc-bar pc-on" style="width:100%"></i></div></div></div><p class="pc-note">Bars start at zero. The axis rescales for each view; compare the printed values.</p></div><aside class="pc-comparison"><span class="pc-eyebrow" id="pc-ratio-label">THROUGHPUT RATIO</span><strong id="pc-ratio">2.79×</strong><p id="pc-ratio-note">Cache on / cache off</p><p id="pc-condition">2,048 shared-prefix tokens · concurrency 32</p><span class="pc-cache-evidence" id="pc-hit">Reported prefix-cache hit rate: 88.89%</span></aside></div>
+      <div class="pc-result-notes"><p id="pc-status" role="status" aria-live="polite">Recorded reference data. 500 measured requests per run; warm-up is excluded.</p><p id="pc-metric-note">Total output tokens divided by benchmark duration. Gains describe the selected synthetic workload, not a universal model acceleration.</p><p class="pc-note">Displayed values are rounded from the source report. Gains use the reported throughput ratios. A p99 here is the median of three per-run p99 values, not a pooled or production-service p99.</p></div>
+    </div>
+    <details class="pc-table-details"><summary>All six throughput and TTFT comparisons</summary><div class="pc-table-wrap"><table><caption>Normal-memory clean reference runs; throughput in output tokens/s, TTFT in ms.</caption><thead><tr><th scope="col">Prefix tokens</th><th scope="col">Concurrency</th><th scope="col">Cache off</th><th scope="col">Cache on</th><th scope="col">Ratio</th><th scope="col">p50 TTFT: off → on</th></tr></thead><tbody><tr><th scope="row">0</th><td>1</td><td>35.3</td><td>35.3</td><td>1.00×</td><td>57 → 58</td></tr><tr><th scope="row">0</th><td>32</td><td>832.2</td><td>831.8</td><td>1.00×</td><td>576 → 633</td></tr><tr><th scope="row">2,048</th><td>1</td><td>32.5</td><td>34.9</td><td>1.07×</td><td>352 → 78</td></tr><tr><th scope="row">2,048</th><td>32</td><td>271.2</td><td>756.3</td><td>2.79×</td><td>1,276 → 634</td></tr><tr><th scope="row">2,048</th><td>128</td><td>252.2</td><td>1,391.0</td><td>5.52×</td><td>10,976 → 1,454</td></tr><tr><th scope="row">4,096</th><td>128</td><td>132.7</td><td>1,137.0</td><td>8.57×</td><td>68,408 → 1,750</td></tr></tbody></table></div></details>
+    <div class="pc-evidence-links"><a href="/assets/prefix-cache/reference-summary.csv" download>Download displayed data (CSV) ↓</a><a href="https://github.com/ryan30402/vllm-prefix-cache-bench/blob/31bd3f27adc617a32b6c9756b2e1d219f037bd8c/analysis/REPORT.md#clean-reference-runs-v2-harness">Read the source report ↗</a></div>
+    <noscript><p class="pc-notice">JavaScript is disabled. The default comparison and complete data table remain available. Use the CSV for every displayed value.</p></noscript>
+  </section>
+  <section id="method" class="pc-section pc-container">
+    <div class="pc-section-title"><p class="pc-eyebrow">03 / WHAT I BUILT</p><h2>More than a cache toggle.</h2><p>The engineering contribution is a controlled benchmark harness: generating inputs, orchestrating paired experiments, and reconciling client measurements with server counters.</p></div>
+    <div class="pc-capabilities"><article class="pc-panel"><span class="pc-step-number">01</span><h3>Controlled workloads</h3><p>Exact token counts, shared prefix tokens, and disjoint warm-up and measured suffixes. Prefix length and concurrency are explicit test conditions.</p></article><article class="pc-panel"><span class="pc-step-number">02</span><h3>Paired experiments</h3><p>Fresh server processes, readiness checks, warm-up, and cache-off/cache-on pairs with randomized order. Per-run settings and environment records remain available.</p></article><article class="pc-panel"><span class="pc-step-number">03</span><h3>Evidence and checks</h3><p>Per-request timing, Prometheus counter differences, request-count checks, failure records, and CPU tests for the harness. Measurement and analysis are inspectable separately.</p></article></div>
+    <ol class="pc-flow" aria-label="Each run's measurement sequence"><li><b>Start</b><span>Fresh vLLM service</span></li><li><b>Warm up</b><span>50 requests</span></li><li><b>Snapshot</b><span>Counter baseline</span></li><li><b>Measure</b><span>500 requests</span></li><li><b>Validate</b><span>Counter delta = 500</span></li></ol>
+    <div class="pc-panel pc-method-note"><h3>A cleaner measurement boundary</h3><p>Warm-up and measured requests share the intended prefix but not a complete prompt. Counter deltas start after warm-up, so they cover the same 500 requests as the benchmark results. The repository keeps the earlier exploratory sweep separate; it is not pooled into these reference numbers.</p><a href="https://github.com/ryan30402/vllm-prefix-cache-bench/tree/31bd3f27adc617a32b6c9756b2e1d219f037bd8c/tests">Inspect the CPU test suite ↗</a></div>
+  </section>
+  <section id="scope" class="pc-section pc-container">
+    <div class="pc-section-title"><p class="pc-eyebrow">04 / SCOPE &amp; EVIDENCE</p><h2>Useful measurements. Clear boundaries.</h2></div>
+    <div class="pc-two-col"><div class="pc-panel"><h3>What this study supports</h3><p>Serving-level comparisons for Qwen2.5-7B-Instruct in BF16 on one NVIDIA A40 GPU model, with vLLM 0.33.0. The 42 reference runs include 36 core runs and six memory-pressure runs.</p><p>The code, fixed configurations, raw request records, and analysis are available in the repository. The numbers on this page are tied to a specific source revision.</p><div class="pc-source-id">Source: <a href="https://github.com/ryan30402/vllm-prefix-cache-bench/tree/31bd3f27adc617a32b6c9756b2e1d219f037bd8c"><code>31bd3f2</code></a></div></div><div class="pc-panel pc-limits"><h3>What it does not establish</h3><p>Traffic is synthetic: one shared prefix, random-token suffixes, fixed output length, and closed-loop concurrency. This is not a production traffic trace or an open-loop capacity study.</p><p>Output sequences can differ between cache states; exact-match checks do not establish equal answer quality. The project evaluates existing vLLM behavior, not a new cache algorithm or custom GPU kernel.</p><p>Multiple-prefix traffic, SLO-guided configuration selection, and cross-hardware validation remain separate extensions, not reported accomplishments.</p></div></div>
+    <div class="pc-actions pc-bottom-actions"><a class="pc-btn pc-primary" href="https://github.com/ryan30402/vllm-prefix-cache-bench">Browse the repository ↗</a><a class="pc-btn" href="https://github.com/ryan30402/vllm-prefix-cache-bench/blob/31bd3f27adc617a32b6c9756b2e1d219f037bd8c/analysis/REPORT.md">Full report &amp; limitations ↗</a><a class="pc-btn" href="https://github.com/ryan30402/vllm-prefix-cache-bench/tree/31bd3f27adc617a32b6c9756b2e1d219f037bd8c/results_v2">Raw reference runs ↗</a></div>
+    <p class="pc-note pc-source-note">Source summary: November 2026 experiments, pinned at 31bd3f2. Public source data only; no new measurements were produced for this page.</p>
+  </section>
+</main>
+<script type="application/json" id="pc-data">{"schema_version":1,"source_commit":"31bd3f27adc617a32b6c9756b2e1d219f037bd8c","source_report":"https://github.com/ryan30402/vllm-prefix-cache-bench/blob/31bd3f27adc617a32b6c9756b2e1d219f037bd8c/analysis/REPORT.md","source_table":"Clean reference runs (v2 harness) / Results","aggregation":"Each displayed value is a median of three per-run measurements. Values are transcribed from the rounded report table; throughput ratios use the reported ratios, not division of displayed rounded values.","environment":{"gpu":"NVIDIA A40","model":"Qwen2.5-7B-Instruct","precision":"BF16","vllm":"0.33.0","suffix_tokens":256,"output_tokens":128,"warmup_requests":50,"measured_requests_per_run":500},"scope":{"reference_runs":42,"reference_requests":21000,"main_runs":36,"memory_pressure_runs":6,"repeats":3},"rows":[{"prefix":0,"concurrency":1,"off":35.3,"on":35.3,"gain":1.0,"tpot_off":28.1,"tpot_on":28.1,"ttft_off":57,"ttft_on":58,"p99_off":67,"p99_on":71,"e2e_off":3628,"e2e_on":3629,"hit_rate":0.0},{"prefix":0,"concurrency":32,"off":832.2,"on":831.8,"gain":1.0,"tpot_off":33.4,"tpot_on":33.4,"ttft_off":576,"ttft_on":633,"p99_off":1140,"p99_on":1050,"e2e_off":4841,"e2e_on":4854,"hit_rate":0.0},{"prefix":2048,"concurrency":1,"off":32.5,"on":34.9,"gain":1.07,"tpot_off":28.3,"tpot_on":28.3,"ttft_off":352,"ttft_on":78,"p99_off":378,"p99_on":107,"e2e_off":3942,"e2e_on":3668,"hit_rate":0.8889},{"prefix":2048,"concurrency":32,"off":271.2,"on":756.3,"gain":2.79,"tpot_off":105.9,"tpot_on":36.9,"ttft_off":1276,"ttft_on":634,"p99_off":9044,"p99_on":1256,"e2e_off":15054,"e2e_on":5337,"hit_rate":0.8889},{"prefix":2048,"concurrency":128,"off":252.2,"on":1391.0,"gain":5.52,"tpot_off":390.2,"tpot_on":77.1,"ttft_off":10976,"ttft_on":1454,"p99_off":51976,"p99_on":5665,"e2e_off":66627,"e2e_on":11688,"hit_rate":0.8889},{"prefix":4096,"concurrency":128,"off":132.7,"on":1137.0,"gain":8.57,"tpot_off":419.7,"tpot_on":95.7,"ttft_off":68408,"ttft_on":1750,"p99_off":108461,"p99_on":6616,"e2e_off":125146,"e2e_on":14479,"hit_rate":0.9412}]}</script>
+
+
+</body></html>
